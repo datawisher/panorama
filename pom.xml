@@ -25,6 +25,7 @@
     <modules>
         <module>spring-boot-web</module>
         <module>spring-boot-druid</module>
+        <module>spring-boot-i18n</module>
     </modules>
 
      <dependencyManagement>
