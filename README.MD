@@ -15,3 +15,7 @@ mybatis-plus，默认hikari连接池
 alibaba druid 数据库连接池
 
 mybatis plus 代码生成器
+
+## spring-boot-flyway
+
+spring boot集成flyway

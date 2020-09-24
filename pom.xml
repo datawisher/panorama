@@ -17,15 +17,20 @@
         <spring-cloud.version>Greenwich.SR6</spring-cloud.version>
         <spring-cloud-alibaba.version>2.1.2.RELEASE</spring-cloud-alibaba.version>
         <lombok.version>1.18.12</lombok.version>
+        <postgresql.version>42.2.14</postgresql.version>
         <mybatis-plus.version>3.3.2</mybatis-plus.version>
         <druid.version>1.1.23</druid.version>
         <velocity.version>2.2</velocity.version>
+        <hutool.version>5.3.8</hutool.version>
+        <jwt.version>0.9.0</jwt.version>
     </properties>
 
     <modules>
         <module>spring-boot-web</module>
         <module>spring-boot-druid</module>
         <module>spring-boot-i18n</module>
+        <module>spring-boot-flyway</module>
+        <module>spring-cloud</module>
     </modules>
 
      <dependencyManagement>
@@ -80,6 +85,17 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
                 <version>${druid.version}</version>
+            </dependency>
+            <!-- 工具类 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jwt.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
