@@ -1,0 +1,6 @@
+server:
+  port: 8010
+
+logging:
+  level:
+    com.datawisher.spring.cloud.feign.serivce.HelloFeignService: debug
