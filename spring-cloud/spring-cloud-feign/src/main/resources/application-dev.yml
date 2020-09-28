@@ -4,3 +4,22 @@ server:
 logging:
   level:
     com.datawisher.spring.cloud.feign.serivce.HelloFeignService: debug
+
+
+feign:
+  compression:
+    request:
+      # 开启gzip压缩
+      enabled: true
+      # 配置压缩文件支持的MIME TYPE
+      mime-types: text/xml, application/xml, application/json
+      # 配置压缩数据大小的下限
+    response:
+      # 开启响应的压缩
+      enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
