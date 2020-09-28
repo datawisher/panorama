@@ -1,5 +1,3 @@
-INSERT INTO person VALUES (111, 'itv', 18);
-
 -- ----------------------------
 -- Records of person
 -- ----------------------------

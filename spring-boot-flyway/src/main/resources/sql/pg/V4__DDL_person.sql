@@ -24,3 +24,5 @@ INSERT INTO person VALUES (1307229373360418817, '喵喵', 21);
 -- Primary Key structure for table person
 -- ----------------------------
 ALTER TABLE person ADD CONSTRAINT user_pkey PRIMARY KEY (id);
+
+INSERT INTO person VALUES (111, 'itv', 18);

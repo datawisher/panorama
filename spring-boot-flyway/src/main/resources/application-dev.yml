@@ -19,8 +19,12 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
   flyway:
     enabled: true
-    locations: classpath:/db/migration/
-    schemas: myschema
+#    locations: classpath:/sql/pg
+#    schemas: myschema
+    locations: classpath:/sql/oracle
+    schemas: youschema
+    baseline-on-migrate: true
+
 
 mybatis-plus:
   configuration:
