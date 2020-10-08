@@ -3,10 +3,10 @@ server:
 
 spring:
   datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:postgresql://localhost:5432/tysql
     username: rps
     password: 123456
-    type: com.alibaba.druid.pool.DruidDataSource
 
 mybatis-plus:
   configuration:
