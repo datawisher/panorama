@@ -20,5 +20,6 @@
         <module>spring-boot-swagger</module>
         <module>spring-boot-jdbc</module>
         <module>spring-boot-jpa</module>
+        <module>spring-boot-test</module>
     </modules>
 </project>
