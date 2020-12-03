@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration;
 
 /**
  * @author Jim Han
  */
-@SpringBootApplication
+@SpringBootApplication(exclude = {RedisRepositoriesAutoConfiguration.class})
 public class SpringBootWebApplication implements CommandLineRunner {
 
     @Autowired
