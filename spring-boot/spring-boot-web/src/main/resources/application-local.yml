@@ -1,5 +1,7 @@
 server:
   port: 8810
+  servlet:
+    context-path: /api
 
 spring:
   redis:
