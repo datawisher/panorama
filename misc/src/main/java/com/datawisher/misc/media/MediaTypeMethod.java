@@ -1,4 +1,4 @@
-package com.datawisher.misc.jdk8.media;
+package com.datawisher.misc.media;
 
 import java.util.stream.Stream;
 import org.apache.commons.lang3.ArrayUtils;

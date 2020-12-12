@@ -1,6 +1,6 @@
 package com.datawisher.misc.jdk8.lambda;
 
-import com.datawisher.misc.jdk8.lambda.FunctionClass.Student;
+import com.datawisher.misc.jdk8.lambda.model.Student;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
