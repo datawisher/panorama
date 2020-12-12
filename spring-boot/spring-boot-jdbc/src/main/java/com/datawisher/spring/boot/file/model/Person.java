@@ -1,4 +1,4 @@
-package com.datawisher.spring.boot.jdbc.model;
+package com.datawisher.spring.boot.file.model;
 
 
 import java.io.Serializable;

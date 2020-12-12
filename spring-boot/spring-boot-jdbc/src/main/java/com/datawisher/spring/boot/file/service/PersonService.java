@@ -1,7 +1,7 @@
-package com.datawisher.spring.boot.jdbc.service;
+package com.datawisher.spring.boot.file.service;
 
-import com.datawisher.spring.boot.jdbc.dao.PersonDao;
-import com.datawisher.spring.boot.jdbc.model.Person;
+import com.datawisher.spring.boot.file.dao.PersonDao;
+import com.datawisher.spring.boot.file.model.Person;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

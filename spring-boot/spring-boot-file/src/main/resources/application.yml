@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: spring-boot-file
+  profiles:
+    active: dev
