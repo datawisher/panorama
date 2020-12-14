@@ -1,16 +1,19 @@
 package com.datawisher.spring.boot.web.controller;
 
 import com.datawisher.spring.boot.web.domain.Person;
+import com.datawisher.spring.boot.web.domain.vo.PersonVo;
 import com.datawisher.spring.boot.web.service.PersonService;
+import com.datawisher.spring.boot.web.util.JsonUtils;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.lang.NonNull;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -48,15 +50,16 @@ public class PersonController {
     }
 
     @GetMapping(params = {"offset", "limit"})
-    public List<Person> getPersonByPage(@RequestParam("offset") int offset,
-            @RequestParam("limit") int limit,
-            HttpServletRequest request) {
-        String sort = request.getParameter("sort");
-        log.info("[pagination request] offset: {}, limit: {}", offset, limit);
-        if (StringUtils.isNotBlank(sort)) {
-            return personService.getPersonByPageAndSort(offset, limit, sort);
+    public List<Person> getPersonByPage(HttpServletRequest request, HttpServletResponse response) {
+        PersonVo vo = new PersonVo();
+        System.out.println("before bind: " + JsonUtils.toJson(vo));
+        ServletRequestDataBinder binder = new ServletRequestDataBinder(vo);
+        binder.bind(request);
+        System.out.println("after bind: " + JsonUtils.toJson(vo));
+        if (StringUtils.isNotBlank(vo.getSort())) {
+            return personService.getPersonByPageAndSort(vo.getOffset(), vo.getLimit(), vo.getSort());
         }
-        return personService.getPersonByPage(offset, limit);
+        return personService.getPersonByPage(vo.getOffset(), vo.getLimit());
     }
 
     @GetMapping(path = "{id}")
