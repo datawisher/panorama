@@ -5,10 +5,16 @@ import com.datawisher.spring.boot.web.domain.vo.PersonVo;
 import com.datawisher.spring.boot.web.service.PersonService;
 import com.datawisher.spring.boot.web.util.JsonUtils;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorContext;
+import javax.validation.ValidatorFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +22,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -52,10 +59,18 @@ public class PersonController {
     @GetMapping(params = {"offset", "limit"})
     public List<Person> getPersonByPage(HttpServletRequest request, HttpServletResponse response) {
         PersonVo vo = new PersonVo();
-        System.out.println("before bind: " + JsonUtils.toJson(vo));
+        log.info("before bind: " + JsonUtils.toJson(vo));
         ServletRequestDataBinder binder = new ServletRequestDataBinder(vo);
         binder.bind(request);
-        System.out.println("after bind: " + JsonUtils.toJson(vo));
+        log.info("after bind: " + JsonUtils.toJson(vo));
+
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<PersonVo>> violations = validator.validate(vo);
+        for (ConstraintViolation<PersonVo> violation : violations) {
+            throw new RuntimeException(violation.getMessage());
+        }
+
         if (StringUtils.isNotBlank(vo.getSort())) {
             return personService.getPersonByPageAndSort(vo.getOffset(), vo.getLimit(), vo.getSort());
         }
@@ -76,5 +91,11 @@ public class PersonController {
     @PutMapping(path = "{id}")
     public void updatePerson(@PathVariable("id") UUID id, @Valid @NonNull @RequestBody Person personToUpdate) {
         personService.updatePerson(id, personToUpdate);
+    }
+
+    @GetMapping(params = "{sort}")
+    public List<Person> getPersonByMatrixVariable(@MatrixVariable(required = true) String sort) {
+        log.info("");
+        return null;
     }
 }
