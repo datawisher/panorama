@@ -14,15 +14,3 @@ spring:
         max-idle: 8
         max-wait: -1ms
         min-idle: 0
-  datasource:
-    url: jdbc:postgresql://localhost:5432/rps
-    username: rps
-    password: 123456
-    name: my-hikari
-    hikari:
-      minimum-idle: 10
-      maximum-pool-size: 20
-      idle-timeout: 300000
-      max-lifetime: 600000
-      connection-timeout: 60000
-      connection-test-query: SELECT 1

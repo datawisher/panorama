@@ -49,9 +49,17 @@ public class PersonServiceImpl implements PersonService {
         return personDao.updatePerson(id, newPerson);
     }
 
-    // TODO
-    // 分页查询
-    // 批量新增
-    // 批量修改
-    // 批量删除
+    @Override
+    public List<Person> getPersonByPage(int offset, int limit) {
+        return personDao.selectPersonByPage(offset, limit);
+    }
+
+    @Override
+    public List<Person> getPersonByPageAndSort(int offset, int limit, String sort) {
+        return personDao.selectPersonByPageAndSort(offset, limit, sort);
+    }
+
+    //TODO 批量新增
+    //TODO 批量修改
+    //TODO 批量删除
 }

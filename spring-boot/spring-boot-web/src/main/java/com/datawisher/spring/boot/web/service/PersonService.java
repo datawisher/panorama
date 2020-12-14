@@ -20,4 +20,8 @@ public interface PersonService {
     int deletePerson(UUID id);
 
     int updatePerson(UUID id, Person newPerson);
+
+    List<Person> getPersonByPage(int offset, int limit);
+
+    List<Person> getPersonByPageAndSort(int offset, int limit, String sort);
 }

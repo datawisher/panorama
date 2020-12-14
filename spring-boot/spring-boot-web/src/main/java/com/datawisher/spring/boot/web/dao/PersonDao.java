@@ -24,4 +24,8 @@ public interface PersonDao {
     int deletePersonById(UUID id);
 
     int updatePerson(UUID id, Person person);
+
+    List<Person> selectPersonByPage(int offset, int limit);
+
+    List<Person> selectPersonByPageAndSort(int offset, int limit, String sort);
 }

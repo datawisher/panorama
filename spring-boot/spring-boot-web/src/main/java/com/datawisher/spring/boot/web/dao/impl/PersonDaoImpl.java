@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -56,5 +57,41 @@ public class PersonDaoImpl implements PersonDao {
                     return 0;
                 })
                 .orElse(0);
+    }
+
+    @Override
+    public List<Person> selectPersonByPage(int offset, int limit) {
+        List<Person> persons = selectAllPerson();
+        if (persons.size() > 1) {
+            if (offset >= persons.size()) {
+                offset = persons.size() - 1;
+            }
+            int lastIndex = offset + limit;
+            if (lastIndex > persons.size()) {
+                lastIndex = persons.size();
+            }
+            return persons.subList(offset, lastIndex);
+        }
+        return persons;
+    }
+
+    @Override
+    public List<Person> selectPersonByPageAndSort(int offset, int limit, String sort) {
+        List<Person> persons = selectAllPerson();
+        List<Person> sortPersons = new ArrayList<>(persons);
+        if (StringUtils.isNotBlank(sort) && "name".equals(sort)) {
+            sortPersons.sort((o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName()));
+        }
+        if (sortPersons.size() > 1) {
+            if (offset >= sortPersons.size()) {
+                offset = sortPersons.size() - 1;
+            }
+            int lastIndex = offset + limit;
+            if (lastIndex > sortPersons.size()) {
+                lastIndex = sortPersons.size();
+            }
+            return sortPersons.subList(offset, lastIndex);
+        }
+        return sortPersons;
     }
 }
