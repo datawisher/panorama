@@ -14,3 +14,8 @@ spring:
         max-idle: 8
         max-wait: -1ms
         min-idle: 0
+msg:
+  enabled: true
+  url: 127.0.0.1
+  access-key-id: 10001
+  access-key-secret: xidd-dics-ss992dx
