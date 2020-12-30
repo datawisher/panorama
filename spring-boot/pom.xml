@@ -23,5 +23,6 @@
         <module>spring-boot-file</module>
         <module>spring-boot-test</module>
         <module>spring-boot-starter</module>
+        <module>spring-boot-distribute-redis-lock</module>
     </modules>
 </project>

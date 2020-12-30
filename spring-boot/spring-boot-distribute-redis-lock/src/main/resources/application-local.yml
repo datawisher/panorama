@@ -1,0 +1,19 @@
+server:
+  port: 8810
+spring:
+  redis:
+    host: localhost
+    port: 16379
+    password: rv7g2mWuetvjwbd7
+    lettuce:
+      pool:
+        # 最大链接数
+        max-active: 30
+        # 链接池中最大空闲链接数
+        max-idle: 15
+        # 最大阻塞等待链接时长 默认不限制 -1
+        max-wait: 2000
+        # 最小空闲链接数
+        min-idle: 10
+      # 链接超时时长
+      shutdown-timeout: 10000
