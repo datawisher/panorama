@@ -53,12 +53,19 @@ public class CodeGenerator {
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
+//        DataSourceConfig dsc = new DataSourceConfig();
+//        dsc.setUrl("jdbc:postgresql://localhost:5432/tysql");
+//        // dsc.setSchemaName("public");
+//        dsc.setDriverName("org.postgresql.Driver");
+//        dsc.setUsername("rps");
+//        dsc.setPassword("123456");
+//        mpg.setDataSource(dsc);
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:postgresql://localhost:5432/tysql");
-        // dsc.setSchemaName("public");
-        dsc.setDriverName("org.postgresql.Driver");
-        dsc.setUsername("rps");
-        dsc.setPassword("123456");
+        dsc.setUrl("jdbc:sqlserver://localhost:1433;database=engtest");
+        dsc.setSchemaName("dbo");
+        dsc.setDriverName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        dsc.setUsername("sa");
+        dsc.setPassword("mom#db&5189_HON");
         mpg.setDataSource(dsc);
 
         // 包配置
