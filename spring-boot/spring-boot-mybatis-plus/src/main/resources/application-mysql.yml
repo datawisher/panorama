@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:13306/mybatis
+    username: rps
+    password: YTYyZWE3MmEyNDc5OGU0NWRkY2I0YTk5

@@ -27,5 +27,6 @@
         <module>spring-boot-elasticsearch</module>
         <module>spring-boot-rabbitmq</module>
         <module>spring-boot-websocket</module>
+        <module>spring-boot-mybatis-plus</module>
     </modules>
 </project>

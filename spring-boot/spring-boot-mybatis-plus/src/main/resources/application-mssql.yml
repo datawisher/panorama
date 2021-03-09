@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://localhost:1433;database=mybatis
+    username: rps
+    password: YTYyZWE3MmEyNDc5OGU0NWRkY2I0YTk5

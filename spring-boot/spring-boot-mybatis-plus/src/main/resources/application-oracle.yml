@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@//10.79.69.147:11521/PDB1
+    username: jim
+    password: jim
+
+#mybatis-plus:
+#  global-config:
+#    db-config:
+#      capital-mode: true

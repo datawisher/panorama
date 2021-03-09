@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: mybatis-plus-demo
+  profiles:
+    active: oracle
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
