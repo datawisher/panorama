@@ -53,24 +53,30 @@ public class CodeGenerator {
 
         // 数据源配置
         // postgresql
-//        DataSourceConfig dsc = new DataSourceConfig();
-//        dsc.setUrl("jdbc:postgresql://localhost:5432/tysql");
-//        // dsc.setSchemaName("public");
-//        dsc.setDriverName("org.postgresql.Driver");
-//        dsc.setUsername("rps");
-//        dsc.setPassword("123456");
-//        mpg.setDataSource(dsc);
-        // mssql server
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:sqlserver://localhost:1433;database=mybatis");
-        dsc.setSchemaName("dbo");
-        dsc.setDriverName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        dsc.setUrl("jdbc:postgresql://localhost:15432/rps");
+        dsc.setSchemaName("public");
+        dsc.setDriverName("org.postgresql.Driver");
         dsc.setUsername("rps");
         dsc.setPassword("YTYyZWE3MmEyNDc5OGU0NWRkY2I0YTk5");
         mpg.setDataSource(dsc);
+        // mssql server
+//        DataSourceConfig dsc = new DataSourceConfig();
+//        dsc.setUrl("jdbc:sqlserver://localhost:1433;database=mybatis");
+//        dsc.setSchemaName("dbo");
+//        dsc.setDriverName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+//        dsc.setUsername("rps");
+//        dsc.setPassword("YTYyZWE3MmEyNDc5OGU0NWRkY2I0YTk5");
+//        mpg.setDataSource(dsc);
         // mysql
-
         // oracle
+//        DataSourceConfig dsc = new DataSourceConfig();
+//        dsc.setUrl("jdbc:oracle:thin:@//localhost:11521/PDB1");
+//        dsc.setSchemaName("JIM");
+//        dsc.setDriverName("oracle.jdbc.OracleDriver");
+//        dsc.setUsername("JIM");
+//        dsc.setPassword("JIM");
+//        mpg.setDataSource(dsc);
 
         // 包配置
         PackageConfig pc = new PackageConfig();

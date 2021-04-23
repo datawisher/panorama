@@ -1,7 +1,7 @@
 package com.datawisher.spring.boot.mybatisplus.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.datawisher.spring.boot.mybatisplus.entity.DataType;
+import com.datawisher.spring.boot.mybatisplus.entity.SysRolePrivilege;
 
 /**
  * <p>
@@ -9,9 +9,8 @@ import com.datawisher.spring.boot.mybatisplus.entity.DataType;
  * </p>
  *
  * @author Jim Han
- * @since 2021-03-07
+ * @since 2021-03-13
  */
-public interface DataTypeMapper extends BaseMapper<DataType> {
-
+public interface SysRolePrivilegeMapper extends BaseMapper<SysRolePrivilege> {
 
 }

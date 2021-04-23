@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.datawisher.spring.boot.mybatisplus.mapper.SysUserMapper">
+
+    <select id="selectByIdFromDifferentDB" databaseId="abc" resultType="map">
+        select * from SYS_USER
+    </select>
+
+    <select id="selectByIdFromDifferentDB" resultType="map">
+        select user_name from sys_user
+    </select>
+
+    <select id="selectDifferentColumnFromDifferentDB" resultType="map">
+        select
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                *
+           </when>
+            <when test="_databaseId == 'mssql'">
+                user_name
+            </when>
+            <otherwise>*</otherwise>
+        </choose>
+        from
+            sys_user
+    </select>
+</mapper>
