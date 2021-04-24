@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan("com.datawisher.spring.boot.mybatisplus.mapper")
-public class Application {
+public class SpringBootMybatisPlusApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(SpringBootMybatisPlusApplication.class, args);
     }
 }
