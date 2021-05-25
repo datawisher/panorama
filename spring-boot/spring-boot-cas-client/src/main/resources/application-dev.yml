@@ -1,0 +1,30 @@
+server:
+  port: 8814
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+#    url: jdbc:postgresql://localhost:5432/tysql
+#    username: rps
+#    password: 123456
+    url: jdbc:oracle:thin:@127.0.0.1:11521/PDB1
+    username: JIM
+    password: JIM
+
+##cas服务端的地址
+#  cas.server-url-prefix=https://www.cainiao.com:8443/cas
+#  #cas服务端的登录地址
+#  cas.server-login-url=https://www.cainiao.com:8443/cas/login
+#  #客户端访问地址
+#  cas.client-host-url=http://www.mashu.com:8080
+#  cas.validation-type=CAS3
+
+logging:
+  level:
+    root: info
+
+cas:
+  server-url-prefix: https://www.datawisher.cn:8443/cas
+  server-login-url: https://www.datawisher.cn:8443/cas/login
+  client-host-url: http://www.datawisher.cn:8814
+  validation-type: cas3

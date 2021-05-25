@@ -7,7 +7,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import org.apache.commons.io.FileUtils;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 

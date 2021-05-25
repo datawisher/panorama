@@ -1,6 +1,6 @@
-package com.datawisher.spring.boot.file.dao;
+package com.datawisher.spring.boot.jdbc.dao;
 
-import com.datawisher.spring.boot.file.model.Person;
+import com.datawisher.spring.boot.jdbc.model.Person;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

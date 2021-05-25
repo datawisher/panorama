@@ -1,7 +1,7 @@
-package com.datawisher.spring.boot.file.controller;
+package com.datawisher.spring.boot.cas.client.controller;
 
-import com.datawisher.spring.boot.file.model.Person;
-import com.datawisher.spring.boot.file.service.PersonService;
+import com.datawisher.spring.boot.cas.client.model.Person;
+import com.datawisher.spring.boot.cas.client.service.PersonService;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

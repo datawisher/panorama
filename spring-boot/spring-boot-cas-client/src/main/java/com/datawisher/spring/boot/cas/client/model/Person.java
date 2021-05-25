@@ -1,4 +1,4 @@
-package com.datawisher.spring.boot.file.model;
+package com.datawisher.spring.boot.cas.client.model;
 
 
 import java.io.Serializable;

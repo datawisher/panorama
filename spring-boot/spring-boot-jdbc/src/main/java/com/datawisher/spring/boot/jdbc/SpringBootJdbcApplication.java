@@ -1,4 +1,4 @@
-package com.datawisher.spring.boot.file;
+package com.datawisher.spring.boot.jdbc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
