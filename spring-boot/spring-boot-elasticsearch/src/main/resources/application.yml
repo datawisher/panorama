@@ -2,9 +2,13 @@ server:
   port: 8080
 
 spring:
-  elasticsearch:
-    rest:
-      uris: http://10.79.69.30:9200
-      read-timeout: 10s
-      username: elastic
-      password: reOOzRfUE4UqBuQQAi16
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch
+      cluster-nodes: localhost:9300
+#  elasticsearch:
+#    rest:
+#      uris: http://localhost:9200
+#      read-timeout: 10s
+#      username: elastic
+#      password: reOOzRfUE4UqBuQQAi16

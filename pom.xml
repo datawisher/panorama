@@ -13,7 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <spring-boot.version>2.3.5.RELEASE</spring-boot.version>
+        <spring-boot.version>2.1.16.RELEASE</spring-boot.version>
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
         <spring-cloud-alibaba.version>2.1.2.RELEASE</spring-cloud-alibaba.version>
         <lombok.version>1.18.12</lombok.version>
@@ -25,6 +25,7 @@
         <jwt.version>0.9.0</jwt.version>
         <swagger.version>2.9.2</swagger.version>
         <dockerfile-maven.version>1.4.13</dockerfile-maven.version>
+        <ojdbc8.version>19.3.0.0</ojdbc8.version>
     </properties>
 
     <modules>

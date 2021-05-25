@@ -3,15 +3,15 @@ server:
 
 spring:
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:postgresql://localhost:5432/jpa
-    username: rps
-    password: 123456
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:oracle:thin:@127.0.0.1:11521/PDB1
+    username: RPS
+    password: 5OGU0NWRkY2I0YTk5
   jpa:
     show-sql: true
-    database: postgresql
+#    database: postgresql
     hibernate:
       ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.Oracle12cDialect
