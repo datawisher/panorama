@@ -1,5 +1,14 @@
+server:
+  port: 8813
+
 spring:
   application:
     name: spring-boot-jdbc
-  profiles:
-    active: dev
+  datasource:
+    url: jdbc:oracle:thin:@127.0.0.1:11521/PDB1
+    username: JIM
+    password: JIM
+
+logging:
+  level:
+    root: info
