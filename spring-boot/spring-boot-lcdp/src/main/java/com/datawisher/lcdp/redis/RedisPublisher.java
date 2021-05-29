@@ -19,11 +19,11 @@ public class RedisPublisher {
     /**
      * 发送消息
      *
-     * @param bizName
+     * @param handlerName
      * @param params
      */
-    public void sendMessage(String bizName, Map<String, Object> params) {
-        params.put(GlobalConstants.HANDLER_NAME, bizName);
+    public void sendMessage(String handlerName, Map<String, Object> params) {
+        params.put(GlobalConstants.HANDLER_NAME, handlerName);
         redisTemplate.convertAndSend(GlobalConstants.REDIS_TOPIC_NAME, params);
     }
 

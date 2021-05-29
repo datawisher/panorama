@@ -4,14 +4,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.datawisher.lcdp.common.vo.Result;
 import com.datawisher.lcdp.redis.RedisPublisher;
 import com.datawisher.lcdp.constant.WebsocketConst;
-import com.datawisher.lcdp.message.websocket.WebsocketServerEndpoint;
-import java.util.HashMap;
-import java.util.Map;
+import com.datawisher.lcdp.message.websocket.WebSocketServerEndpoint;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -24,15 +21,7 @@ public class MessageController {
     @Autowired
     private RedisPublisher redisClient;
     @Autowired
-    private WebsocketServerEndpoint websocketServerEndpoint;
-
-    @RequestMapping("/send-message/{handlerName}")
-    public String sendMessage(@PathVariable(name = "handlerName") String handlerName) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("aa", 123);
-        redisClient.sendMessage(handlerName, map);
-        return "OK";
-    }
+    private WebSocketServerEndpoint websocketServerEndpoint;
 
     /**
      * 广播
@@ -46,7 +35,7 @@ public class MessageController {
         String message = jsonObject.getString("message");
         JSONObject obj = new JSONObject();
         obj.put(WebsocketConst.MSG_CMD, WebsocketConst.CMD_TOPIC);
-        obj.put(WebsocketConst.MSG_ID, "M0001");
+        obj.put(WebsocketConst.MSG_ID, "MSG-"+ UUID.randomUUID());
         obj.put(WebsocketConst.MSG_TXT, message);
         websocketServerEndpoint.sendMessage(obj.toJSONString());
         result.setResult("群发！");
@@ -66,8 +55,8 @@ public class MessageController {
         String message = jsonObject.getString("message");
         JSONObject obj = new JSONObject();
         obj.put(WebsocketConst.MSG_CMD, WebsocketConst.CMD_USER);
+        obj.put(WebsocketConst.MSG_ID, "MSG-"+ UUID.randomUUID());
         obj.put(WebsocketConst.MSG_USER_ID, userId);
-        obj.put(WebsocketConst.MSG_ID, "M0001");
         obj.put(WebsocketConst.MSG_TXT, message);
         websocketServerEndpoint.sendMessage(userId, obj.toJSONString());
         result.setResult("单发");

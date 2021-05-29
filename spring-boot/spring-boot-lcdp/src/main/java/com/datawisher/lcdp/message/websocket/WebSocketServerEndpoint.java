@@ -1,8 +1,6 @@
 package com.datawisher.lcdp.message.websocket;
 
-import com.alibaba.fastjson.JSONObject;
 import com.datawisher.lcdp.redis.RedisPublisher;
-import com.datawisher.lcdp.constant.WebsocketConst;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -24,12 +22,12 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 @ServerEndpoint(value = "/websocket/{userId}") //此注解相当于设置访问URL
-public class WebsocketServerEndpoint {
+public class WebSocketServerEndpoint {
 
     @Autowired
     private RedisPublisher redisPublisher;
 
-    private static final String REDIS_TOPIC_Handler = "socketHandler";
+    private static final String MESSAGE_HANDLER = "webSocketMessageHandler";
 
     private Session session;
     private String userId;
@@ -37,7 +35,7 @@ public class WebsocketServerEndpoint {
     /**
      * 缓存 webSocket连接到单机服务class中（整体方案支持集群）
      */
-    private static CopyOnWriteArraySet<WebsocketServerEndpoint> webSockets = new CopyOnWriteArraySet<>();
+    private static CopyOnWriteArraySet<WebSocketServerEndpoint> webSockets = new CopyOnWriteArraySet<>();
     private static Map<String, Session> sessionPool = new HashMap<>();
 
     @OnOpen
@@ -65,12 +63,7 @@ public class WebsocketServerEndpoint {
     @OnMessage
     public void onMessage(String message) {
         log.debug("【websocket消息】收到客户端消息:" + message);
-        JSONObject obj = new JSONObject();
-        //业务类型
-        obj.put(WebsocketConst.MSG_CMD, WebsocketConst.CMD_CHECK);
-        //消息内容
-        obj.put(WebsocketConst.MSG_TXT, "心跳响应");
-        for (WebsocketServerEndpoint webSocket : webSockets) {
+        for (WebSocketServerEndpoint webSocket : webSockets) {
             webSocket.pushMessage(message);
         }
     }
@@ -121,7 +114,7 @@ public class WebsocketServerEndpoint {
         Map<String, Object> params = new HashMap<>();
         params.put("userId", "");
         params.put("message", message);
-        redisPublisher.sendMessage(REDIS_TOPIC_Handler, params);
+        redisPublisher.sendMessage(MESSAGE_HANDLER, params);
     }
 
     /**
@@ -134,7 +127,7 @@ public class WebsocketServerEndpoint {
         Map<String, Object> params = new HashMap<>();
         params.put("userId", userId);
         params.put("message", message);
-        redisPublisher.sendMessage(REDIS_TOPIC_Handler, params);
+        redisPublisher.sendMessage(MESSAGE_HANDLER, params);
     }
 
     /**

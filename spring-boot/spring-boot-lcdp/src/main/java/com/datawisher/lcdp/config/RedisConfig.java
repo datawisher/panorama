@@ -76,15 +76,20 @@ public class RedisConfig extends CachingConfigurerSupport {
      */
     @Bean
     public RedisMessageListenerContainer redisContainer(
-            RedisConnectionFactory redisConnectionFactory, RedisSubscriber redisSubscriber, MessageListenerAdapter commonListenerAdapter) {
+            RedisConnectionFactory redisConnectionFactory, MessageListenerAdapter redisMessageListenerAdapter) {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(redisConnectionFactory);
-        container.addMessageListener(commonListenerAdapter, new ChannelTopic(GlobalConstants.REDIS_TOPIC_NAME));
+        container.addMessageListener(redisMessageListenerAdapter, new ChannelTopic(GlobalConstants.REDIS_TOPIC_NAME));
         return container;
     }
 
+    /**
+     *  redis 消息监听适配器
+     * @param redisSubscriber
+     * @return
+     */
     @Bean
-    MessageListenerAdapter commonListenerAdapter(RedisSubscriber redisSubscriber) {
+    MessageListenerAdapter redisMessageListenerAdapter(RedisSubscriber redisSubscriber) {
         MessageListenerAdapter messageListenerAdapter = new MessageListenerAdapter(redisSubscriber, "onMessage");
         messageListenerAdapter.setSerializer(jacksonSerializer());
         return messageListenerAdapter;

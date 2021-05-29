@@ -2,13 +2,12 @@ package com.datawisher.lcdp.redis;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.datawisher.lcdp.constant.GlobalConstants;
-import com.datawisher.lcdp.redis.listener.LcdpRedisListener;
 import com.datawisher.lcdp.util.SpringContextHolder;
 import java.util.Map;
 import org.springframework.stereotype.Component;
 
 /**
- * redis 订阅者
+ * redis 订阅者, 要在RedisConfig里注册监听类和监听方法
  *
  * @author h407644
  * @date 2021-05-28
@@ -23,8 +22,8 @@ public class RedisSubscriber {
      */
     public void onMessage(Map<String, Object> params) {
         String handlerName = params.get(GlobalConstants.HANDLER_NAME).toString();
-        LcdpRedisListener messageListener = SpringContextHolder
-                .getHandler(handlerName, LcdpRedisListener.class);
+        RedisMessageListener messageListener = SpringContextHolder
+                .getHandler(handlerName, RedisMessageListener.class);
         if (ObjectUtil.isNotEmpty(messageListener)) {
             messageListener.onMessage(params);
         }

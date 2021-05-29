@@ -1,9 +1,8 @@
-package com.datawisher.lcdp.message;
+package com.datawisher.lcdp.message.websocket;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.datawisher.lcdp.constant.CommonSendStatus;
-import com.datawisher.lcdp.redis.listener.LcdpRedisListener;
-import com.datawisher.lcdp.message.websocket.WebsocketServerEndpoint;
+import com.datawisher.lcdp.redis.RedisMessageListener;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +13,10 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class SocketHandler implements LcdpRedisListener {
+public class WebSocketMessageHandler implements RedisMessageListener {
 
     @Autowired
-    private WebsocketServerEndpoint websocket;
+    private WebSocketServerEndpoint websocket;
 
     @Override
     public void onMessage(Map<String, Object> map) {
