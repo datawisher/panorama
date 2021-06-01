@@ -30,12 +30,12 @@ public class LcdpEntity implements Serializable {
 
     @ApiModelProperty(value = "创建时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createTime;
+    private Date createAt;
 
     @ApiModelProperty(value = "更新人")
     private String updateBy;
 
     @ApiModelProperty(value = "更新时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date updateTime;
+    private Date updateAT;
 }
