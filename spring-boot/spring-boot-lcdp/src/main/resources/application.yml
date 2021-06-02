@@ -12,3 +12,7 @@ spring:
     url: jdbc:oracle:thin:@127.0.0.1:11521/PDB1
     username: JIM
     password: 'JIM'
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
