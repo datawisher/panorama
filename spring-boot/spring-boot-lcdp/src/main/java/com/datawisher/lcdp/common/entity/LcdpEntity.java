@@ -1,6 +1,8 @@
 package com.datawisher.lcdp.common.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
@@ -30,12 +32,14 @@ public class LcdpEntity implements Serializable {
 
     @ApiModelProperty(value = "创建时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createAt;
+    @TableField(fill = FieldFill.INSERT)
+    private Date createTime;
 
     @ApiModelProperty(value = "更新人")
     private String updateBy;
 
     @ApiModelProperty(value = "更新时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date updateAt;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
 }
