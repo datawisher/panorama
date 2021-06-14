@@ -1,8 +1,6 @@
 package com.datawisher.lcdp.message.controller;
 
-import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.datawisher.lcdp.common.vo.Result;
 import com.datawisher.lcdp.message.domain.SysMessage;
@@ -42,5 +40,11 @@ public class SysMessageController {
     public Result<?> add(@RequestBody SysMessage sysMessage) {
         sysMessageService.save(sysMessage);
         return Result.ok("添加成功！");
+    }
+
+    @PostMapping("/update")
+    public Result<?> update(@RequestBody SysMessage sysMessage) {
+        sysMessageService.updateById(sysMessage);
+        return Result.ok("更新成功！");
     }
 }
