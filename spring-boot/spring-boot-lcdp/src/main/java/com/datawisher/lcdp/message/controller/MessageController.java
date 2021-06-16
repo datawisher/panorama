@@ -2,8 +2,8 @@ package com.datawisher.lcdp.message.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.datawisher.lcdp.common.vo.Result;
-import com.datawisher.lcdp.redis.RedisPublisher;
-import com.datawisher.lcdp.constant.WebsocketConst;
+import com.datawisher.lcdp.message.redis.RedisPublisher;
+import com.datawisher.lcdp.message.constant.WebsocketConst;
 import com.datawisher.lcdp.message.websocket.WebSocketServerEndpoint;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;

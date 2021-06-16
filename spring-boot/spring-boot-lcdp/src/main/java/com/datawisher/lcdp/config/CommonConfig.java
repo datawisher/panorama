@@ -1,6 +1,6 @@
 package com.datawisher.lcdp.config;
 
-import com.datawisher.lcdp.util.SpringContextHolder;
+import com.datawisher.lcdp.common.util.SpringContextHolder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,6 +1,6 @@
 package com.datawisher.lcdp.message.websocket;
 
-import com.datawisher.lcdp.redis.RedisPublisher;
+import com.datawisher.lcdp.message.redis.RedisPublisher;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArraySet;

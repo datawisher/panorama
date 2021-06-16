@@ -1,7 +1,7 @@
 package com.datawisher.lcdp.config;
 
-import com.datawisher.lcdp.constant.GlobalConstants;
-import com.datawisher.lcdp.redis.RedisSubscriber;
+import com.datawisher.lcdp.message.constant.GlobalConstants;
+import com.datawisher.lcdp.message.redis.RedisSubscriber;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;

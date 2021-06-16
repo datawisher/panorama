@@ -1,8 +1,8 @@
-package com.datawisher.lcdp.redis;
+package com.datawisher.lcdp.message.redis;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.datawisher.lcdp.constant.GlobalConstants;
-import com.datawisher.lcdp.util.SpringContextHolder;
+import com.datawisher.lcdp.message.constant.GlobalConstants;
+import com.datawisher.lcdp.common.util.SpringContextHolder;
 import java.util.Map;
 import org.springframework.stereotype.Component;
 

@@ -1,6 +1,6 @@
 package com.datawisher.lcdp.common.vo;
 
-import com.datawisher.lcdp.constant.CommonConstant;
+import com.datawisher.lcdp.common.constant.CommonConstant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

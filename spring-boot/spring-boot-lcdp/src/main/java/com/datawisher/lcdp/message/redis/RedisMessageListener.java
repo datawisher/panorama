@@ -1,4 +1,4 @@
-package com.datawisher.lcdp.redis;
+package com.datawisher.lcdp.message.redis;
 
 import java.util.Map;
 

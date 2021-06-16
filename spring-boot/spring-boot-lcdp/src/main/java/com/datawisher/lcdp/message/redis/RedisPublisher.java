@@ -1,6 +1,6 @@
-package com.datawisher.lcdp.redis;
+package com.datawisher.lcdp.message.redis;
 
-import com.datawisher.lcdp.constant.GlobalConstants;
+import com.datawisher.lcdp.message.constant.GlobalConstants;
 import java.util.Map;
 import javax.annotation.Resource;
 import org.springframework.data.redis.core.RedisTemplate;

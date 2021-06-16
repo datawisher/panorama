@@ -1,4 +1,4 @@
-package com.datawisher.lcdp.constant;
+package com.datawisher.lcdp.message.constant;
 
 public class GlobalConstants {
 
