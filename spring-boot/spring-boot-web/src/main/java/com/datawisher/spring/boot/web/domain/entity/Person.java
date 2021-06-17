@@ -1,4 +1,4 @@
-package com.datawisher.spring.boot.web.domain;
+package com.datawisher.spring.boot.web.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.UUID;

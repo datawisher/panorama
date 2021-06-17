@@ -1,7 +1,7 @@
 package com.datawisher.spring.boot.web.dao.impl;
 
 import com.datawisher.spring.boot.web.dao.PersonDao;
-import com.datawisher.spring.boot.web.domain.Person;
+import com.datawisher.spring.boot.web.domain.entity.Person;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

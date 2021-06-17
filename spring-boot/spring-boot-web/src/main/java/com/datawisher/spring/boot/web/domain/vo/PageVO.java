@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class PageVo {
+public class PageVO {
 
     @JsonProperty("offset")
     private int offset;

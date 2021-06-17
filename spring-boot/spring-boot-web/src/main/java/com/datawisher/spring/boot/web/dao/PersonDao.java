@@ -1,6 +1,6 @@
 package com.datawisher.spring.boot.web.dao;
 
-import com.datawisher.spring.boot.web.domain.Person;
+import com.datawisher.spring.boot.web.domain.entity.Person;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

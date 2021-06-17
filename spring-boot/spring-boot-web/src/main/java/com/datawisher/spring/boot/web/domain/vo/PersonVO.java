@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class PersonVo extends PageVo {
+public class PersonVO extends PageVO {
 
     @JsonProperty("id")
     private UUID id;

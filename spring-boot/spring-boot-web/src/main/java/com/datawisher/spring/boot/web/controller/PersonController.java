@@ -1,7 +1,7 @@
 package com.datawisher.spring.boot.web.controller;
 
-import com.datawisher.spring.boot.web.domain.Person;
-import com.datawisher.spring.boot.web.domain.vo.PersonVo;
+import com.datawisher.spring.boot.web.domain.entity.Person;
+import com.datawisher.spring.boot.web.domain.vo.PersonVO;
 import com.datawisher.spring.boot.web.service.PersonService;
 import com.datawisher.spring.boot.web.util.JsonUtils;
 import java.util.List;
@@ -13,7 +13,6 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
 import javax.validation.Validation;
 import javax.validation.Validator;
-import javax.validation.ValidatorContext;
 import javax.validation.ValidatorFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -58,7 +57,7 @@ public class PersonController {
 
     @GetMapping(params = {"offset", "limit"})
     public List<Person> getPersonByPage(HttpServletRequest request, HttpServletResponse response) {
-        PersonVo vo = new PersonVo();
+        PersonVO vo = new PersonVO();
         log.info("before bind: " + JsonUtils.toJson(vo));
         ServletRequestDataBinder binder = new ServletRequestDataBinder(vo);
         binder.bind(request);
@@ -66,8 +65,8 @@ public class PersonController {
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
-        Set<ConstraintViolation<PersonVo>> violations = validator.validate(vo);
-        for (ConstraintViolation<PersonVo> violation : violations) {
+        Set<ConstraintViolation<PersonVO>> violations = validator.validate(vo);
+        for (ConstraintViolation<PersonVO> violation : violations) {
             throw new RuntimeException(violation.getMessage());
         }
 
