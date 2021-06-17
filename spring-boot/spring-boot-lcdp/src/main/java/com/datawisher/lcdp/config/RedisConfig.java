@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RedissonClient;
+import org.redisson.spring.cache.RedissonSpringCacheManager;
+import org.redisson.spring.data.connection.RedissonConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -31,21 +34,24 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 public class RedisConfig extends CachingConfigurerSupport {
 
+    // 用了redisson，所以把lettuce改成了redisson的connection工厂类
     @Autowired
-    private LettuceConnectionFactory lettuceConnectionFactory;
+    private RedissonConnectionFactory redissonConnectionFactory;
+    @Autowired
+    private RedissonClient redissonClient;
 
     /**
      * RedisTemplate配置
      *
-     * @param lettuceConnectionFactory
+     * @param redissonConnectionFactory
      * @return
      */
     @Bean
-    public RedisTemplate<String, Object> redisTemplate(LettuceConnectionFactory lettuceConnectionFactory) {
+    public RedisTemplate<String, Object> redisTemplate(RedissonConnectionFactory redissonConnectionFactory) {
         log.info(" --- redis config init --- ");
         Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer =jacksonSerializer();
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
-        redisTemplate.setConnectionFactory(lettuceConnectionFactory);
+        redisTemplate.setConnectionFactory(redissonConnectionFactory);
         RedisSerializer<?> stringSerializer = new StringRedisSerializer();
         // key序列化
         redisTemplate.setKeySerializer(stringSerializer);
@@ -93,5 +99,15 @@ public class RedisConfig extends CachingConfigurerSupport {
         MessageListenerAdapter messageListenerAdapter = new MessageListenerAdapter(redisSubscriber, "onMessage");
         messageListenerAdapter.setSerializer(jacksonSerializer());
         return messageListenerAdapter;
+    }
+
+    /**
+     *  指定使用redisson的cache manager实现
+     * @param redissonClient
+     * @return
+     */
+    @Bean
+    public RedissonSpringCacheManager redissonSpringCacheManager(RedissonClient redissonClient) {
+        return new RedissonSpringCacheManager(redissonClient);
     }
 }

@@ -22,7 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) // 避免websocket服务报错
-public class LcdpApplicationTest {
+public class MybatisPlusTest {
     @Autowired
     private StaffMapper staffMapper;
     @Autowired
@@ -68,6 +68,9 @@ public class LcdpApplicationTest {
         System.out.println(one);
     }
 
+    /**
+     *  lambda 链式查询
+     */
     @Test
     public void testChain() {
         List<Staff> list = staffService.lambdaQuery()
