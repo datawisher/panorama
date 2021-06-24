@@ -1,0 +1,47 @@
+package com.datawisher.spring.boot.drools;
+
+import java.text.*;
+import java.util.*;
+
+
+declare Person
+  id : Integer @primaryKey(主键)
+  name : String
+  age : int
+  weight : java.math.BigDecimal
+end
+
+declare Programmer extends Person
+  company : String
+end
+
+
+
+function String formatDate(Date date) {
+  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+  return sdf.format(date);
+}
+
+function boolean canDiscount(int price, int amount, int discountBoundary) {
+  return price * amount > discountBoundary;
+}
+
+function void print(Sale sale) {
+  Date date = Functionutil.plusDay(sale.getDate(), 10);
+  System.out.println("销售单：" + sale.getSaleCode() + ", 时间：" + formatDate);
+}
+
+rule "CreditCheckRule"
+  when
+    $la: LoanApplicant(income > (2 * loanAmount))
+  then
+    $la.setCheckCreditOk(true);
+    System.out.println(" You are eligible loan Approved "+ $la.getName());
+end
+
+rule "Programmer Filter"
+  when
+    $p : Programmer(age > 30)
+  then
+    System.out.println("年龄大于30的程序员："  + $p.getCompany() + " - " + $p.getName());
+end

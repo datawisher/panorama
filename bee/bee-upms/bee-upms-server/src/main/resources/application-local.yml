@@ -1,0 +1,12 @@
+server:
+  port: 9777
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${nacos.discovery.host:127.0.0.1}:8848
+        namespace: ${nacos.discovery.namespace:public}
+        group: ${nacos.discovery.group:DEFAULT_GROUP}
+        username: ${nacos.discovery.username:nacos}
+        password: ${nacos.discovery.password:nacos}

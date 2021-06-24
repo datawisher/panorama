@@ -1,0 +1,20 @@
+server:
+  port: 9888
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${nacos.discovery.host:127.0.0.1}:8848
+        namespace: ${nacos.discovery.namespace:public}
+        group: ${nacos.discovery.group:DEFAULT_GROUP}
+        username: ${nacos.discovery.username:nacos}
+        password: ${nacos.discovery.password:nacos}
+  datasource:
+    url: jdbc:oracle:thin:@127.0.0.1:11521/PDB1
+    username: JIM
+    password: 'JIM'
+  redis:
+    host: localhost
+    port: 16379
+    password: 'rv7g2mWuetvjwbd7'
