@@ -18,3 +18,8 @@ spring:
     host: localhost
     port: 16379
     password: 'rv7g2mWuetvjwbd7'
+
+logging:
+  level:
+    root: info
+    org.springframework: debug

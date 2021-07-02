@@ -1,13 +1,11 @@
 package cn.datawisher.bee.base.security.service;
 
 import cn.datawisher.bee.base.core.constant.CacheConstants;
-import cn.datawisher.bee.base.core.constant.CommonConstants;
 import cn.datawisher.bee.base.core.constant.SecurityConstants;
 import cn.datawisher.bee.upms.dto.UserInfo;
 import cn.datawisher.bee.upms.entity.SysUser;
 import cn.datawisher.bee.upms.feign.RemoteUserService;
 import cn.hutool.core.util.ArrayUtil;
-import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.api.R;
 import java.util.Arrays;
 import java.util.Collection;
@@ -54,6 +52,7 @@ public class BeeUserDetailsService implements UserDetailsService {
 
     /**
      * 构建userdetails
+     *
      * @param result 用户信息
      * @return
      */
@@ -66,7 +65,8 @@ public class BeeUserDetailsService implements UserDetailsService {
         Set<String> dbAuthsSet = new HashSet<>();
         if (ArrayUtil.isNotEmpty(info.getRoles())) {
             // 获取角色
-            Arrays.stream(info.getRoles()).forEach(role -> dbAuthsSet.add(SecurityConstants.ROLE + role));
+            Arrays.stream(info.getRoles())
+                    .forEach(role -> dbAuthsSet.add(SecurityConstants.ROLE + role));
             // 获取资源
             dbAuthsSet.addAll(Arrays.asList(info.getPermissions()));
 
@@ -77,7 +77,8 @@ public class BeeUserDetailsService implements UserDetailsService {
 
         // 构造security用户
         return new BeeUser(user.getId(), user.getDeptId(), user.getUsername(),
-                SecurityConstants.BCRYPT + user.getPassword(),
-                StrUtil.equals(String.valueOf(user.isEnabled()), CommonConstants.STATUS_NORMAL), true, true, true, authorities);
+                user.getPassword(), user.isEnabled(),
+                true, true, true,
+                authorities);
     }
 }

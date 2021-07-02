@@ -32,6 +32,10 @@
             <groupId>cn.datawisher</groupId>
             <artifactId>bee-base-db</artifactId>
         </dependency>
+<!--        <dependency>
+            <groupId>cn.datawisher</groupId>
+            <artifactId>bee-base-security</artifactId>
+        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>

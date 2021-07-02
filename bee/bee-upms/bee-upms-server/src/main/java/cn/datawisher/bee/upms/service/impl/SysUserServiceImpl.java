@@ -18,6 +18,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Override
     public UserInfo getUserInfo(SysUser sysUser) {
-        return null;
+        UserInfo userInfo = new UserInfo();
+        userInfo.setSysUser(sysUser);
+        return userInfo;
     }
 }

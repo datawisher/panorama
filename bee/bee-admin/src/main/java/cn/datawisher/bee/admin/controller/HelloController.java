@@ -1,5 +1,6 @@
 package cn.datawisher.bee.admin.controller;
 
+import com.baomidou.mybatisplus.extension.api.R;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -43,8 +45,16 @@ public class HelloController {
         return "index";
     }
 
-    @GetMapping("/index2")
+    @GetMapping("/hello")
+    @ResponseBody
     public String hello2() {
-        return "index";
+        return "hello, bee!";
     }
+
+/*    @GetMapping(value = { "/info" })
+    @ResponseBody
+    public R info() {
+        String username = SecurityUtils.getUser().getUsername();
+        return null;
+    }*/
 }

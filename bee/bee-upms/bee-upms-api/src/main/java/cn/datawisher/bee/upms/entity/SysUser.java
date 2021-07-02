@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import lombok.Data;
 
 /**
@@ -45,13 +45,13 @@ public class SysUser implements Serializable {
      * 创建时间
      */
     @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createTime;
+    private Timestamp createTime;
 
     /**
      * 修改时间
      */
     @ApiModelProperty(value = "修改时间")
-    private LocalDateTime updateTime;
+    private Timestamp updateTime;
 
     /**
      * 手机号
