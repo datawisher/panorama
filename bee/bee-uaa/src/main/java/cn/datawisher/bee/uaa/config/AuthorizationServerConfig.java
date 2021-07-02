@@ -1,10 +1,14 @@
 package cn.datawisher.bee.uaa.config;
 
-import org.checkerframework.checker.units.qual.A;
+import cn.datawisher.bee.base.core.constant.SecurityConstants;
+import cn.datawisher.bee.base.security.service.BeeClientDetailsService;
+import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -17,7 +21,6 @@ import org.springframework.security.oauth2.provider.code.InMemoryAuthorizationCo
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 /**
@@ -31,22 +34,28 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     RedisConnectionFactory connectionFactory;
     @Autowired
+    DataSource dataSource;
+    @Autowired
     TokenStore tokenStore;
     @Autowired
     ClientDetailsService clientDetailsService;
 
 
     /**
-     * token 存储在内存中
+     * token 存储在redis中
      *
      * @return
      */
     @Bean
     TokenStore tokenStore() {
-        // return new InMemoryTokenStore(); 内存存储token，仅适合单机版
         return new RedisTokenStore(connectionFactory);
     }
 
+    /**
+     * 设置token相关属性
+     *
+     * @return
+     */
     @Bean
     AuthorizationServerTokenServices tokenServices() {
         DefaultTokenServices services = new DefaultTokenServices();
@@ -58,9 +67,25 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         return services;
     }
 
+    /**
+     * 生成code的存储位置，内存或db
+     * @return
+     */
     @Bean
     AuthorizationCodeServices authorizationCodeServices() {
         return new InMemoryAuthorizationCodeServices();
+    }
+
+    /**
+     * 角色的继承，例如admin可以访问user的接口
+     *
+     * @return
+     */
+    @Bean
+    RoleHierarchy roleHierarchy() {
+        RoleHierarchyImpl hierarchy = new RoleHierarchyImpl();
+        hierarchy.setHierarchy("ROLE_admin > ROLE_user");
+        return hierarchy;
     }
 
     /**
@@ -83,13 +108,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-                .withClient("javaboy")
-                .secret(new BCryptPasswordEncoder().encode("123"))
-                .resourceIds("res1")
-                .authorizedGrantTypes("authorization_code", "refresh_token")
-                .scopes("all")
-                .redirectUris("http://localhost:9111/index.html");
+        BeeClientDetailsService clientDetailsService = new BeeClientDetailsService(dataSource);
+        clients.withClientDetails(clientDetailsService);
     }
 
     /**

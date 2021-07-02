@@ -28,14 +28,22 @@
             <groupId>cn.datawisher</groupId>
             <artifactId>bee-base-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.datawisher</groupId>
+            <artifactId>bee-base-db</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.datawisher</groupId>
+            <artifactId>bee-base-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.datawisher</groupId>
+            <artifactId>bee-upms-api</artifactId>
+        </dependency>
         <!--OAuth2 安全模块-->
         <dependency>
             <groupId>org.springframework.security.oauth.boot</groupId>
             <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.oracle.database.jdbc</groupId>
-            <artifactId>ojdbc8</artifactId>
         </dependency>
     </dependencies>
 

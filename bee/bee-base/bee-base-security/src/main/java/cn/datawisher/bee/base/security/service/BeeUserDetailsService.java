@@ -31,11 +31,12 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class BeeUserDetailsServiceImpl implements UserDetailsService {
+public class BeeUserDetailsService implements UserDetailsService {
 
     private final RemoteUserService remoteUserService;
     private final CacheManager cacheManager;
 
+    // 从Redis取用户，没有则查询upms
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Cache cache = cacheManager.getCache(CacheConstants.USER_DETAILS);
@@ -75,8 +76,8 @@ public class BeeUserDetailsServiceImpl implements UserDetailsService {
         SysUser user = info.getSysUser();
 
         // 构造security用户
-        return new BeeUser(user.getUserId(), user.getDeptId(), user.getUsername(),
+        return new BeeUser(user.getId(), user.getDeptId(), user.getUsername(),
                 SecurityConstants.BCRYPT + user.getPassword(),
-                StrUtil.equals(user.getLockFlag(), CommonConstants.STATUS_NORMAL), true, true, true, authorities);
+                StrUtil.equals(String.valueOf(user.isEnabled()), CommonConstants.STATUS_NORMAL), true, true, true, authorities);
     }
 }

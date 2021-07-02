@@ -1,6 +1,8 @@
 package cn.datawisher.bee.uaa.config;
 
 
+import cn.datawisher.bee.base.security.service.BeeUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -16,6 +18,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private BeeUserDetailsService userDetailsService;
+
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -23,14 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("sang")
-                .password(new BCryptPasswordEncoder().encode("123"))
-                .roles("admin")
-                .and()
-                .withUser("javaboy")
-                .password(new BCryptPasswordEncoder().encode("123"))
-                .roles("user");
+        auth.userDetailsService(userDetailsService);
     }
 
     @Override

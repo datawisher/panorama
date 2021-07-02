@@ -10,10 +10,9 @@
     <version>1.0.0</version>
 
     <modules>
-        <module>bee-auth</module>
-        <module>bee-upms</module>
         <module>bee-base</module>
         <module>bee-uaa</module>
+        <module>bee-upms</module>
         <module>bee-admin</module>
     </modules>
 
@@ -61,6 +60,11 @@
             <dependency>
                 <groupId>cn.datawisher</groupId>
                 <artifactId>bee-base-security</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.datawisher</groupId>
+                <artifactId>bee-base-db</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

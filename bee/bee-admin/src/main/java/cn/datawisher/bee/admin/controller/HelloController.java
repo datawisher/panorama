@@ -27,8 +27,8 @@ public class HelloController {
         if (code != null) {
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
             map.add("code", code);
-            map.add("client_id", "javaboy");
-            map.add("client_secret", "123");
+            map.add("client_id", "honeywell");
+            map.add("client_secret", "888");
             map.add("redirect_uri", "http://localhost:9111/index.html");
             map.add("grant_type", "authorization_code");
             Map<String,String> resp = restTemplate.postForObject("http://localhost:9888/oauth/token", map, Map.class);
@@ -40,6 +40,11 @@ public class HelloController {
             ResponseEntity<String> entity = restTemplate.exchange("http://localhost:9777/admin/hello", HttpMethod.GET, httpEntity, String.class);
             model.addAttribute("msg", entity.getBody());
         }
+        return "index";
+    }
+
+    @GetMapping("/index2")
+    public String hello2() {
         return "index";
     }
 }

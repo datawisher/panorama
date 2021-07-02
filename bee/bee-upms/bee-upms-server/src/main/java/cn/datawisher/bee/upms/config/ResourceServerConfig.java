@@ -25,8 +25,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     RemoteTokenServices tokenServices() {
         RemoteTokenServices services = new RemoteTokenServices();
         services.setCheckTokenEndpointUrl("http://localhost:9888/oauth/check_token");
-        services.setClientId("javaboy");
-        services.setClientSecret("123");
+        services.setClientId("honeywell");
+        services.setClientSecret("android");
         return services;
     }
 
@@ -39,6 +39,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/admin/**").hasRole("admin")
+                .antMatchers("/user/**").permitAll()
                 .anyRequest().authenticated();
     }
 }

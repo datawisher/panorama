@@ -2,8 +2,6 @@ package cn.datawisher.bee.upms.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,9 +19,15 @@ public class SysUser implements Serializable {
     /**
      * 主键ID
      */
-    @TableId(value = "user_id", type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     @ApiModelProperty(value = "主键id")
-    private Integer userId;
+    private Integer id;
+
+    /**
+     * 部门ID
+     */
+    @ApiModelProperty(value = "用户所属部门id")
+    private Integer deptId;
 
     /**
      * 用户名
@@ -38,13 +42,6 @@ public class SysUser implements Serializable {
     private String password;
 
     /**
-     * 随机盐
-     */
-    @JsonIgnore
-    @ApiModelProperty(value = "随机盐")
-    private String salt;
-
-    /**
      * 创建时间
      */
     @ApiModelProperty(value = "创建时间")
@@ -57,32 +54,56 @@ public class SysUser implements Serializable {
     private LocalDateTime updateTime;
 
     /**
-     * 锁定标记
-     */
-    @ApiModelProperty(value = "锁定标记")
-    private String lockFlag;
-
-    /**
      * 手机号
      */
     @ApiModelProperty(value = "手机号")
     private String phone;
 
     /**
-     * 头像
+     * 邮件
      */
-    @ApiModelProperty(value = "头像地址")
-    private String avatar;
+    @ApiModelProperty(value = "邮件")
+    private String email;
 
     /**
-     * 部门ID
+     * 证件类型
      */
-    @ApiModelProperty(value = "用户所属部门id")
-    private Integer deptId;
+    @ApiModelProperty(value = "证件类型")
+    private String cardType;
 
     /**
-     * 0-正常，1-删除
+     * 证件号码
      */
-    @TableLogic
-    private String delFlag;
+    @ApiModelProperty(value = "证件号码")
+    private String cardNo;
+
+    /**
+     * 地址
+     */
+    @ApiModelProperty(value = "地址")
+    private String address;
+
+    /**
+     * 账户是否过期
+     */
+    @ApiModelProperty(value = "账户是否过期")
+    private boolean accountNonExpired;
+
+    /**
+     * 账户是否锁定
+     */
+    @ApiModelProperty(value = "账户是否锁定")
+    private boolean accountNonLocked;
+
+    /**
+     * 密码是否过期
+     */
+    @ApiModelProperty(value = "密码是否过期")
+    private boolean credentialsNonExpired;
+
+    /**
+     * 是否启用
+     */
+    @ApiModelProperty(value = "账户是否启用")
+    private boolean enabled;
 }

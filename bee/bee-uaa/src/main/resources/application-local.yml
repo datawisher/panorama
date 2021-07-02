@@ -11,9 +11,9 @@ spring:
         username: ${nacos.discovery.username:nacos}
         password: ${nacos.discovery.password:nacos}
   datasource:
-    url: jdbc:oracle:thin:@127.0.0.1:11521/PDB1
-    username: JIM
-    password: 'JIM'
+    url: jdbc:postgresql://localhost:15432/bee?connectTimeout=60&socketTimeout=60
+    username: rps
+    password: YTYyZWE3MmEyNDc5OGU0NWRkY2I0YTk5
   redis:
     host: localhost
     port: 16379
