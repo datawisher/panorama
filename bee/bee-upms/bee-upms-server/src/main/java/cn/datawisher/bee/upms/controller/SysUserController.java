@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.api.R;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value = "user", tags = "用户管理模块")
 public class SysUserController {
 
-    private final SysUserService sysUserService;
+    @Autowired
+    private SysUserService sysUserService;
 
     /**
      * 获取当前用户全部信息

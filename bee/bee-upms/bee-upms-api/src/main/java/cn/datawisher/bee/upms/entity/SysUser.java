@@ -19,7 +19,7 @@ public class SysUser implements Serializable {
     /**
      * 主键ID
      */
-    @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     @ApiModelProperty(value = "主键id")
     private Integer id;
 
