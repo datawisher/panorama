@@ -1,13 +1,13 @@
 server:
-  port: 8813
+  port: 80
 
 spring:
   application:
     name: spring-boot-jdbc
   datasource:
-    url: jdbc:oracle:thin:@127.0.0.1:11521/PDB1
-    username: JIM
-    password: JIM
+    url: jdbc:mysql://localhost:13306/ace?autoReconnect=true
+    username: root
+    password: root
 
 logging:
   level:
