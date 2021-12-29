@@ -13,6 +13,12 @@
     <artifactId>spring-boot-web</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
+    <properties>
+        <java.version>1.8</java.version>
+        <scripts_packageName>${project.artifactId}-${project.version}</scripts_packageName>
+        <scripts_bootMain>com.datawisher.spring.boot.web.SpringBootWebApplication</scripts_bootMain>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -47,8 +53,114 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <includes>
+                        <include>
+                            <groupId>non-exists</groupId>
+                            <artifactId>non-exists</artifactId>
+                        </include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <archive>
+                        <addMavenDescriptor>false</addMavenDescriptor>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <!--suppress UnresolvedMavenProperty -->
+                            <mainClass>${scripts_bootMain}</mainClass>
+                        </manifest>
+                    </archive>
+                    <!-- 打包排除项 -->
+                    <excludes>
+                        <exclude>**/*.yml</exclude>
+                        <exclude>**/*.properties</exclude>
+                        <exclude>**/*.xml</exclude>
+                        <exclude>**/*.sh</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-a-jar</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>${project.basedir}/src/main/assembly/assembly.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <!-- 传递给脚本的参数值 -->
+                <activeProfile>dev</activeProfile>
+                <!--suppress UnresolvedMavenProperty -->
+                <package-name>${scripts_packageName}</package-name>
+                <!--suppress UnresolvedMavenProperty -->
+                <boot-main>${scripts_bootMain}</boot-main>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <!-- 传递给脚本的参数值 -->
+                <activeProfile>test</activeProfile>
+                <!--suppress UnresolvedMavenProperty -->
+                <package-name>${scripts_packageName}</package-name>
+                <!--suppress UnresolvedMavenProperty -->
+                <boot-main>${scripts_bootMain}</boot-main>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <!-- 传递给脚本的参数值 -->
+                <activeProfile>prod</activeProfile>
+                <!--suppress UnresolvedMavenProperty -->
+                <package-name>${scripts_packageName}</package-name>
+                <!--suppress UnresolvedMavenProperty -->
+                <boot-main>${scripts_bootMain}</boot-main>
+            </properties>
+        </profile>
+    </profiles>
 </project>
