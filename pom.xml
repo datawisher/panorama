@@ -6,6 +6,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>design-pattern</module>
+        <module>spring5</module>
     </modules>
 
     <groupId>cn.datawisher</groupId>
