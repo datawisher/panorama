@@ -14,7 +14,7 @@ public class Lock2Singleton {
 
     public static Lock2Singleton getInstance() {
         if (singleton == null) {
-            synchronized (Singleton.class) {
+            synchronized (Lock2Singleton.class) {
                 if (singleton == null) {
                     singleton = new Lock2Singleton();
                 }
