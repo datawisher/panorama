@@ -1,0 +1,13 @@
+package cn.datawisher.design.pattern.strategy;
+
+/**
+ * @author h407644
+ * @date 2022-01-29
+ */
+public class TravelByCarStrategy implements TravelStrategy {
+
+    @Override
+    public void travelMode() {
+        System.err.println("travel by car");
+    }
+}
