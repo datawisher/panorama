@@ -1,4 +1,4 @@
-package com.datawisher.springboot.model;
+package com.datawisher.springboot.apicipher.starter.model;
 
 /**
  * @author h407644

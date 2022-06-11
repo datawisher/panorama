@@ -1,4 +1,4 @@
-package com.datawisher.springboot.starter.apicipher.config;
+package com.datawisher.springboot.apicipher.starter.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

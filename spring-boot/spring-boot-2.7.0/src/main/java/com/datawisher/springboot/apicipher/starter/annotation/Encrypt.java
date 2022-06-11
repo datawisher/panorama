@@ -1,4 +1,4 @@
-package com.datawisher.springboot.starter.apicipher.annotation;
+package com.datawisher.springboot.apicipher.starter.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -10,6 +10,6 @@ import java.lang.annotation.Target;
  * @date 2022-06-05
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD,ElementType.PARAMETER})
-public @interface Decrypt {
+@Target(ElementType.METHOD)
+public @interface Encrypt {
 }

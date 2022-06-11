@@ -1,9 +1,9 @@
-package com.datawisher.springboot.starter.apicipher.advice;
+package com.datawisher.springboot.apicipher.starter.advice;
 
-import com.datawisher.springboot.model.RespBean;
-import com.datawisher.springboot.starter.apicipher.annotation.Encrypt;
-import com.datawisher.springboot.starter.apicipher.config.EncryptProperties;
-import com.datawisher.springboot.util.AESUtils;
+import com.datawisher.springboot.apicipher.starter.annotation.Encrypt;
+import com.datawisher.springboot.apicipher.starter.config.EncryptProperties;
+import com.datawisher.springboot.apicipher.starter.model.RespBean;
+import com.datawisher.springboot.apicipher.starter.util.AESUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

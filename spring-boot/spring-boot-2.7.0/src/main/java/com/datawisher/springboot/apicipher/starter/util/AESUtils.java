@@ -1,4 +1,4 @@
-package com.datawisher.springboot.util;
+package com.datawisher.springboot.apicipher.starter.util;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
