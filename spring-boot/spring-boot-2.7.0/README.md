@@ -7,3 +7,6 @@ com.datawisher.springboot.starter.apicipher
 ## 仿tomcat过滤器链
 com.datawisher.springboot.filterchain
 简化版tomcat容器过滤器链工作原理
+
+## springmvc拦截器简易原理
+com.datawisher.springboot.interceptorchain
