@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!-- 简单的文本插值 -->
+    <h2>{{ website }}</h2>
+    <!-- 输出html代码 -->
+    <h2 v-html="website"></h2>
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+    const vm = Vue.createApp({
+        data() {
+            return {
+                website: '<a href="https://www.baidu.com">Baidu</a>'
+            }
+        }
+    }).mount('#app');
+</script>
+</body>
+</html>

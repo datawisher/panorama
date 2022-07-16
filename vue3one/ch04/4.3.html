@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!-- 使用 Javascript 表达式 -->
+    <h2>{{message.toUpperCase()}}</h2>
+    <p>苹果总共{{price*total}}</p>
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+    const vm = Vue.createApp({
+        data() {
+            return {
+                message: 'apple',
+                price: 5,
+                total: 260
+            }
+        },
+    }).mount('#app');
+</script>
+</body>
+</html>

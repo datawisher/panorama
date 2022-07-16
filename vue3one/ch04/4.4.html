@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!-- 模型双向绑定 -->
+    输入内容: <input type="text" v-model="message"></br>
+    反转内容: {{reversedMessage()}}
+</div>
+
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+    const vm = Vue.createApp({
+        data() {
+            return {
+                message: ''
+            }
+        },
+        methods: {
+            reversedMessage: function () {
+                return this.message.split('').reverse().join('')
+            },
+        },
+    }).mount('#app');
+</script>
+</body>
+</html>

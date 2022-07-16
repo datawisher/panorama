@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <p><a v-bind:[attr]="url">百度链接</a></p>
+    <p><button v-on:[things]="doSomething">单击事件</button></p>
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+    const vm = Vue.createApp({
+        data() {
+            return {
+                attr: 'href',
+                things: 'click',
+                url: 'https://www.baidu.com'
+            }
+        },
+        methods: {
+            doSomething: function () {
+                alert('触发了单击事件！')
+            },
+        }
+    }).mount('#app');
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    {{num}}
+    <!-- 事件调用方法 + 传参 -->
+    <p><button v-on:click="add(2)">增加</button></p>
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+    const vm = Vue.createApp({
+        data() {
+            return {
+                num: 1
+            }
+        },
+        methods: {
+            add: function (a) {
+                this.num += a;
+            },
+        }
+    }).mount('#app');
+</script>
+</body>
+</html>

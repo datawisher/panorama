@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    {{content}}
+    {{way2()}}
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+    const vm = Vue.createApp({
+        data() {
+            return {
+                content: '古诗'
+            }
+        },
+        methods: {
+            way1: function () {
+                alert('东风扇淑气，水木荣春晖。')
+            },
+            way2: function () {
+                this.$options.methods.way1();
+            },
+        }
+    }).mount('#app');
+</script>
+</body>
+</html>
