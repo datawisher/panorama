@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author h407644
  * @date 2022-09-10
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.datawisher.bee"})
 public class BeeSystemApplication {
 
     public static void main(String[] args) {

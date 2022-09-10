@@ -15,8 +15,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>com.datawisher</groupId>
+            <artifactId>bee-common-core</artifactId>
         </dependency>
     </dependencies>
 

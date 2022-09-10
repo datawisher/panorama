@@ -73,6 +73,21 @@
                 <version>${mybatis-plus-generator.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.datawisher</groupId>
+                <artifactId>bee-common-core</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.datawisher</groupId>
+                <artifactId>bee-common-tool</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.datawisher</groupId>
+                <artifactId>bee-common-model</artifactId>
+                <version>${revision}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
