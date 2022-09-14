@@ -1,6 +1,7 @@
 package com.datawisher.bee.common.model.dto;
 
-import com.datawisher.bee.common.model.constant.CommonConstant;
+import com.datawisher.bee.common.model.constant.StatusCode;
+import com.datawisher.bee.common.model.util.MessageUtils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -53,38 +54,30 @@ public class Result<T> implements Serializable {
     }
 
     public static<T> Result<T> ok() {
-        Result<T> r = new Result<>();
-        r.setSuccess(true);
-        r.setCode(CommonConstant.CODE_OK_0);
-        r.setMessage("成功");
-        return r;
+        return ok(null);
     }
 
     public static<T> Result<T> ok(T data) {
+        return ok(StatusCode.OK, data);
+    }
+
+    public static<T> Result<T> ok(StatusCode code, T data) {
         Result<T> r = new Result<>();
         r.setSuccess(true);
-        r.setCode(CommonConstant.CODE_OK_0);
+        r.setCode(code.getCode());
+        r.setMessage(MessageUtils.getMsg(code));
         r.setData(data);
         return r;
     }
 
-    public static<T> Result<T> ok(String msg, T data) {
-        Result<T> r = new Result<>();
-        r.setSuccess(true);
-        r.setCode(CommonConstant.CODE_OK_0);
-        r.setMessage(msg);
-        r.setData(data);
-        return r;
+    public static<T> Result<T> error() {
+        return error(StatusCode.ERROR);
     }
 
-    public static<T> Result<T> error(String msg) {
-        return error(CommonConstant.CODE_ERROR_1, msg);
-    }
-
-    public static<T> Result<T> error(int code, String msg) {
+    public static<T> Result<T> error(StatusCode code) {
         Result<T> r = new Result<>();
-        r.setCode(code);
-        r.setMessage(msg);
+        r.setCode(code.getCode());
+        r.setMessage(MessageUtils.getMsg(code));
         r.setSuccess(false);
         return r;
     }

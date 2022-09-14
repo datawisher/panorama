@@ -1,28 +1,31 @@
 package com.datawisher.bee.system.user.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
  * <p>
- * 
+ * 系统用户表
  * </p>
  *
  * @author Jim Han
- * @since 2022-09-10
+ * @since 2022-09-12
  */
 @Data
 @TableName("sys_user")
-@ApiModel(value = "SysUser对象", description = "")
+@ApiModel(value = "SysUser对象", description = "系统用户表")
 public class SysUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键")
-    private Integer id;
+    @TableId(type = IdType.ASSIGN_ID)
+    private Long id;
 
     @ApiModelProperty("用户名")
     private String username;
@@ -35,4 +38,35 @@ public class SysUser implements Serializable {
 
     @ApiModelProperty("姓名")
     private String realname;
+
+    @ApiModelProperty("头像")
+    private String avatar;
+
+    @ApiModelProperty("邮箱")
+    private String email;
+
+    @ApiModelProperty("手机")
+    private String mobile;
+
+    @ApiModelProperty("账号状态(1:正常2:锁定3:首次注册)")
+    private String status;
+
+    @ApiModelProperty("已登录部门")
+    private String deptCode;
+
+    @ApiModelProperty("创建人")
+    private String createBy;
+
+    @ApiModelProperty("创建时间")
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
+
+    @ApiModelProperty("修改人")
+    private String updateBy;
+
+    @ApiModelProperty("修改时间")
+    private LocalDateTime updateTime;
+
+    @ApiModelProperty("删除标记")
+    private String delFlag;
 }
