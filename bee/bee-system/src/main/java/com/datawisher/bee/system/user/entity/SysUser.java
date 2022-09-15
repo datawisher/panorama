@@ -65,8 +65,10 @@ public class SysUser implements Serializable {
     private String updateBy;
 
     @ApiModelProperty("修改时间")
+    @TableField(fill = FieldFill.UPDATE)
     private LocalDateTime updateTime;
 
     @ApiModelProperty("删除标记")
+    @TableField(fill = FieldFill.INSERT)
     private String delFlag;
 }
