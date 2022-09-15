@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author Jim Han
@@ -50,7 +50,7 @@ public class SysUserController {
         boolean result;
         try {
             result = sysUserService.updateById(sysUser);
-            return result ? Result.ok(StatusCode.USER_EDIT_SUCCESS) : Result.error(StatusCode.USER_EDIT_ERROR);
+            return result ? Result.ok(StatusCode.USER_EDIT_SUCCESS, null) : Result.error(StatusCode.USER_EDIT_ERROR);
         } catch (Exception e) {
             throw new SystemException(StatusCode.USER_EDIT_ERROR, e);
         }
@@ -61,7 +61,7 @@ public class SysUserController {
     public Result<?> removeSysUserById(@RequestBody SysUser sysUser) throws SystemException {
         try {
             boolean result = sysUserService.removeById(sysUser);
-            return result ? Result.ok(StatusCode.USER_DELETE_SUCCESS) : Result.error(StatusCode.USER_DELETE_ERROR);
+            return result ? Result.ok(StatusCode.USER_DELETE_SUCCESS, null) : Result.error(StatusCode.USER_DELETE_ERROR);
         } catch (Exception e) {
             throw new SystemException(StatusCode.USER_DELETE_ERROR, e);
         }
@@ -72,7 +72,7 @@ public class SysUserController {
     public Result<?> batchRemoveSysUserByIds(@RequestBody List<String> ids) throws SystemException {
         try {
             boolean result = sysUserService.removeBatchByIds(ids, 50);
-            return result ? Result.ok(StatusCode.USER_BATCH_DELETE_SUCCESS) : Result.error(StatusCode.USER_BATCH_DELETE_ERROR);
+            return result ? Result.ok(StatusCode.USER_BATCH_DELETE_SUCCESS, null) : Result.error(StatusCode.USER_BATCH_DELETE_ERROR);
         } catch (Exception e) {
             throw new SystemException(StatusCode.USER_BATCH_DELETE_ERROR, e);
         }
