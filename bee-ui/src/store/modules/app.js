@@ -1,8 +1,8 @@
 export default {
   state: {
     appName: "Bee",
-    themeColor: "#14889A",
-    oldThemeColor: "#14889A",
+    themeColor: "#3C6CC6",
+    oldThemeColor: "#3C6CC6",
     // 导航栏收缩状态
     collapse: false,
     // 菜单路由是否已加载
