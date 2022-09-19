@@ -34,6 +34,15 @@
             <div class="lang-item" @click="changeLanguage('en_us')">English</div>
           </el-popover>
         </el-menu-item>
+        <el-menu-item index="4" v-popover:popover-notice>
+          <!-- 系统通知 -->
+          <el-badge :value="4" :max="99" class="badge" type="error">
+            <li style="color:#fff;" class="fa fa-bell-o fa-lg"></li>
+          </el-badge>
+          <el-popover ref="popover-notice" placement="bottom-end" trigger="click">
+            <notice-panel></notice-panel>
+          </el-popover>
+        </el-menu-item>
         <el-menu-item index="3" v-popover:popover-personal>
           <!-- 用户信息 -->
           <span class="user-info"><img :src="user.avatar" />{{ user.name }}</span>
@@ -50,14 +59,16 @@
 import { mapState } from 'vuex'
 import mock from '@/mock/index'
 import Hamburger from '@/components/Hamburger'
-import ThemePicker from "@/components/ThemePicker"
-import PersonalPanel from "@/views/Core/PersonalPanel"
+import ThemePicker from '@/components/ThemePicker'
+import PersonalPanel from '@/views/Core/PersonalPanel'
+import NoticePanel from '@/views/Core/NoticePanel'
 
 export default {
   components: {
     Hamburger,
     ThemePicker,
-    PersonalPanel
+    PersonalPanel,
+    NoticePanel
   },
   data() {
     return {
@@ -138,7 +149,6 @@ export default {
   font-size: 18px;
   background: #b0d6ce4d;
 }
-
 .user-info {
   font-size: 20px;
   color: #fff;
@@ -151,7 +161,9 @@ export default {
     float: right;
   }
 }
-
+.badge {
+  line-height: 18px;
+}
 .position-left {
   left: 200px;
 }
