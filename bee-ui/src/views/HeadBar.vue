@@ -34,6 +34,15 @@
             <div class="lang-item" @click="changeLanguage('en_us')">English</div>
           </el-popover>
         </el-menu-item>
+        <el-menu-item index="3" v-popover:popover-message>
+          <!-- 我的私信 -->
+          <el-badge :value="5" :max="99" class="badge" type="error">
+            <li style="color:#fff;" class="fa fa-envelope-o fa-lg"></li>
+          </el-badge>
+          <el-popover ref="popover-message" placement="bottom-end" trigger="click">
+            <message-panel></message-panel>
+          </el-popover>
+        </el-menu-item>
         <el-menu-item index="4" v-popover:popover-notice>
           <!-- 系统通知 -->
           <el-badge :value="4" :max="99" class="badge" type="error">
@@ -43,7 +52,7 @@
             <notice-panel></notice-panel>
           </el-popover>
         </el-menu-item>
-        <el-menu-item index="3" v-popover:popover-personal>
+        <el-menu-item index="5" v-popover:popover-personal>
           <!-- 用户信息 -->
           <span class="user-info"><img :src="user.avatar" />{{ user.name }}</span>
           <el-popover ref="popover-personal" placement="bottom-end" trigger="click" :visible-arrow="false">
@@ -62,13 +71,15 @@ import Hamburger from '@/components/Hamburger'
 import ThemePicker from '@/components/ThemePicker'
 import PersonalPanel from '@/views/Core/PersonalPanel'
 import NoticePanel from '@/views/Core/NoticePanel'
+import MessagePanel from '@/views/Core/MessagePanel'
 
 export default {
   components: {
     Hamburger,
     ThemePicker,
     PersonalPanel,
-    NoticePanel
+    NoticePanel,
+    MessagePanel
   },
   data() {
     return {
