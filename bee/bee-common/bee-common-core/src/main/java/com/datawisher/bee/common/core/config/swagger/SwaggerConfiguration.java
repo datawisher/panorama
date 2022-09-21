@@ -72,7 +72,7 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
      * 设置授权信息
      */
     private List<SecurityScheme> securitySchemes() {
-        ApiKey apiKey = new ApiKey("BASE_TOKEN", "token", In.HEADER.toValue());
+        ApiKey apiKey = new ApiKey("X-ACCESS-TOKEN", "token", In.HEADER.toValue());
         return Collections.singletonList(apiKey);
     }
 

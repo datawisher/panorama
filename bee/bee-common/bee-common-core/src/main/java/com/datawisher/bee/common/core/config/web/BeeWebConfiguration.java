@@ -14,7 +14,8 @@ public class BeeWebConfiguration implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*")
+                //.allowedOrigins("*")
+                .allowedOriginPatterns("*")
                 .allowedMethods("GET","POST","PUT","OPTIONS","DELETE")
                 .maxAge(168000)
                 .allowedHeaders("*")

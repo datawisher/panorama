@@ -5,6 +5,7 @@ import com.datawisher.bee.common.model.dto.Result;
 import com.datawisher.bee.common.model.exception.SystemException;
 import com.datawisher.bee.system.user.entity.SysUser;
 import com.datawisher.bee.system.user.service.ISysUserService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import java.util.List;
  * @author Jim Han
  * @since 2022-09-10
  */
+@Api(tags = "用户管理")
 @RestController
 @RequestMapping("/user")
 public class SysUserController {
