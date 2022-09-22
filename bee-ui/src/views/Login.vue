@@ -64,13 +64,14 @@ export default {
         password: this.loginForm.password,
         captcha: this.loginForm.captcha
       }
-      this.$api.login.login(userInfo).then((res) => {
+      this.$api.login.login(userInfo).then((res) => { // 调用登录接口
         if (res.msg != null) {
           this.$message({message: res.msg, type: 'error'})
         } else {
-          Cookies.set('token', res.data.token)
-          sessionStorage.setItem('user', userInfo.account)
-          this.$router.push('/')
+          Cookies.set('token', res.data.token) // 放置token到Cookie
+          sessionStorage.setItem('user', userInfo.account) // 保存用户到本地会话
+          this.$store.commit('menuRouteLoaded', false) // 要求重新加载导航菜单
+          this.$router.push('/')  // 登录成功，跳转到主页
         }
         this.loading = false
       }).catch((res) => {
