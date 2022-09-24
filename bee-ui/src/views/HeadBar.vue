@@ -5,7 +5,9 @@
     <span class="hamburg">
       <el-menu class="el-menu-demo" :background-color="themeColor" text-color="#fff"
                :active-text-color="themeColor" mode="horizontal">
-        <el-menu-item index="1" @click="onCollapse"><hamburger :isActive="collapse"></hamburger></el-menu-item>
+        <el-menu-item index="1" @click="onCollapse">
+          <hamburger :isActive="collapse"></hamburger>
+        </el-menu-item>
       </el-menu>
     </span>
     <!-- 导航菜单 -->
@@ -14,12 +16,13 @@
                :background-color="themeColor" text-color="#fff" active-text-color="#ffd04b" mode="horizontal" @select="selectNavBar()">
         <el-menu-item index="1" @click="$router.push('/')">{{$t("common.home")}}</el-menu-item>
         <el-menu-item index="2" @click="openWindow('https://gitee.com/liuge1988/kitty/wikis/Home')">{{$t("common.doc")}}</el-menu-item>
-        <el-menu-item index="3" @click="openWindow('https://www.cnblogs.com/xifengxiaoma/')">{{$t("common.form")}}</el-menu-item>
+        <el-menu-item index="3" @click="openWindow('https://www.cnblogs.com/xifengxiaoma/')">{{$t("common.blog")}}</el-menu-item>
       </el-menu>
     </span>
     <!-- 工具栏 -->
     <span class="toolbar">
-      <el-menu class="el-menu-demo" :background-color="themeColor" text-color="#14889A" active-text-color="#14889A" mode="horizontal">
+      <el-menu class="el-menu-demo" :background-color="themeColor" text-color="#14889A"
+               :active-text-color="themeColor" mode="horizontal">
         <el-menu-item index="1">
           <!-- 主题切换 -->
           <theme-picker class="theme-picker" :default="themeColor"
@@ -54,7 +57,7 @@
         </el-menu-item>
         <el-menu-item index="5" v-popover:popover-personal>
           <!-- 用户信息 -->
-          <span class="user-info"><img :src="user.avatar" />{{ user.name }}</span>
+          <span class="user-info"><img :src="user.avatar" />{{user.name}}</span>
           <el-popover ref="popover-personal" placement="bottom-end" trigger="click" :visible-arrow="false">
             <personal-panel :user="user"></personal-panel>
           </el-popover>
@@ -66,20 +69,19 @@
 
 <script>
 import { mapState } from 'vuex'
-import mock from '@/mock/index'
-import Hamburger from '@/components/Hamburger'
-import ThemePicker from '@/components/ThemePicker'
-import PersonalPanel from '@/views/Core/PersonalPanel'
-import NoticePanel from '@/views/Core/NoticePanel'
-import MessagePanel from '@/views/Core/MessagePanel'
-
+import mock from "@/mock/index"
+import Hamburger from "@/components/Hamburger"
+import ThemePicker from "@/components/ThemePicker"
+import NoticePanel from "@/views/Core/NoticePanel"
+import MessagePanel from "@/views/Core/MessagePanel"
+import PersonalPanel from "@/views/Core/PersonalPanel"
 export default {
-  components: {
+  components:{
     Hamburger,
     ThemePicker,
-    PersonalPanel,
     NoticePanel,
-    MessagePanel
+    MessagePanel,
+    PersonalPanel
   },
   data() {
     return {
@@ -94,6 +96,9 @@ export default {
     }
   },
   methods: {
+    openWindow(url) {
+      window.open(url)
+    },
     selectNavBar(key, keyPath) {
       console.log(key, keyPath)
     },
@@ -102,8 +107,8 @@ export default {
       this.$store.commit('onCollapse')
     },
     // 切换主题
-    onThemeChange: function (themeColor) {
-      this.$store.commit("setThemeColor", themeColor)
+    onThemeChange: function(themeColor) {
+      this.$store.commit('setThemeColor', themeColor)
     },
     // 语言切换
     changeLanguage(lang) {
@@ -113,13 +118,13 @@ export default {
     }
   },
   mounted() {
-    var user = sessionStorage.getItem('user')
+    var user = sessionStorage.getItem("user")
     if (user) {
       this.user.name = user
-      this.user.avatar = require('@/assets/user.png')
+      this.user.avatar = require("@/assets/user.png")
     }
   },
-  computed: {
+  computed:{
     ...mapState({
       themeColor: state=>state.app.themeColor,
       collapse: state=>state.app.collapse
@@ -128,7 +133,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
 .headbar {
   position: fixed;
   top: 0;
@@ -140,15 +145,15 @@ export default {
   border-left-width: 1px;
   border-left-style: solid;
 }
-
-.hamburg, .navbar {
+.hamburg {
   float: left;
 }
-
+.navbar {
+  float: left;
+}
 .toolbar {
   float: right;
 }
-
 .lang-item {
   font-size: 16px;
   padding-left: 8px;
