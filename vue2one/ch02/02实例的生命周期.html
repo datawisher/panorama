@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>实例的生命周期</title>
+  <script src="../js/vue.js" type="text/javascript" charset="UTF-8"></script>
+</head>
+<body>
+<div id="app" @click="change">
+  <p>{{ message }}</p>
+</div>
+<script type="text/javascript">
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello Vue2'
+    },
+    methods: {
+      change() {
+        this.message = 'Welcome to New world!'
+        console.group('点击事件执行方法');
+        console.log("%c%s", "color:red", "el      : " + this.$el); //[object HTMLDivElement]
+        console.log(this.$el)
+        console.log("%c%s", "color:red", "data    : " + this.$data); //[object Object]
+        console.log("%c%s", "color:red", "message : " + this.message); //Welcome to New world!
+      }
+    },
+    // 这个时候this还不能使用，data中的数据、methods中的方法，以及watcher中的事件都不能获得，值为undefined。
+    beforeCreate() {
+      console.group('beforeCreate 创建前状态');
+      console.log("%c%s", "color:red", "el      : " + this.$el); //undefined
+      console.log("%c%s", "color:red", "data    : " + this.$data); //undefined
+      console.log("%c%s", "color:red", "message : " + this.message); //undefined
+    },
+    // 这个时候可以操作Vue中的数据和方法，但是还不能对DOM节点进行操作。
+    created() {
+      console.group('create 创建完毕状态');
+      console.log("%c%s", "color:red", "el      : " + this.$el); //undefined
+      console.log("%c%s", "color:red", "data    : " + this.$data); //[object Object]
+      console.log("%c%s", "color:red", "message : " + this.message); //Hello Vue2
+    },
+    // 这个时候，$el属性已存在，是虚拟DOM，只是数据未挂载到模板中。
+    beforeMount() {
+      console.group('beforeMount 挂载前状态');
+      console.log("%c%s", "color:red", "el      : " + this.$el); //[object HTMLDivElement]
+      console.log(this.$el)
+      console.log("%c%s", "color:red", "data    : " + this.$data); //[object Object]
+      console.log("%c%s", "color:red", "message : " + this.message); //Hello Vue2
+    },
+    // 挂载完毕，这时DOM节点被渲染到文档内，DOM操作在此时能正常进行。mounted()不会承诺所有的子组件都一起被挂载，
+    // 如果想要整个视图都渲染完毕，可以使用vm.$nextTick替换mounted()。
+    mounted() {
+      console.group('mounted 挂载结束状态');
+      console.log("%c%s", "color:red", "el      : " + this.$el); //[object HTMLDivElement]
+      console.log(this.$el)
+      console.log("%c%s", "color:red", "data    : " + this.$data); //[object Object]
+      console.log("%c%s", "color:red", "message : " + this.message); //Hello Vue2
+    },
+    // beforeUpdate()是指View层的数据变化前，而不是data中的数据改变前被触发。因为Vue是由数据驱动的。
+    beforeUpdate() {
+      console.group('beforeUpdate 更新前状态');
+      console.log("%c%s", "color:red", "el      : " + this.$el); //[object HTMLDivElement]
+      console.log(this.$el)
+      console.log(this.$el.innerHTML)
+      console.log("%c%s", "color:red", "data    : " + this.$data); //[object Object]
+      console.log("%c%s", "color:red", "message : " + this.message); //Welcome to New world!
+    },
+    // View层的数据更新后，data中的数据同beforeUpdate()，都是更新完以后的。如果希望等到整个视图都重绘完毕，可以用vm.$nextTick替换掉updated()。
+    updated() {
+      console.group('updated 更新完成状态');
+      console.log("%c%s", "color:red", "el      : " + this.$el); //[object HTMLDivElement]
+      console.log(this.$el)
+      console.log(this.$el.innerHTML)
+      console.log("%c%s", "color:red", "data    : " + this.$data); //[object Object]
+      console.log("%c%s", "color:red", "message : " + this.message); //Welcome to New world!
+    },
+    // beforeDestroy()在实例销毁前被调用。在这一步，实例仍然完全可用。beforeDestroy()在实例销毁前被调用。在这一步，实例仍然完全可用
+    beforeDestroy() {
+      console.group('beforeDestory 销毁前状态');
+      console.log("%c%s", "color:red", "el      : " + this.$el); //[object HTMLDivElement]
+      console.log(this.$el)
+      console.log("%c%s", "color:red", "data    : " + this.$data); //[object Object]
+      console.log("%c%s", "color:red", "message : " + this.message); //Welcome to New world!
+    },
+    // 执行destroyed ()后，对data的改变不会再触发生命周期函数，此时的Vue实例已经解除了事件监听及与DOM的绑定，但是DOM结构依然存在。
+    destroyed() {
+      console.group('destroyed 销毁完成状态');
+      console.log("%c%s", "color:red", "el      : " + this.$el); //[object HTMLDivElement]
+      console.log(this.$el)
+      console.log("%c%s", "color:red", "data    : " + this.$data); //[object Object]
+      console.log("%c%s", "color:red", "message : " + this.message); //Welcome to New world!
+    },
+  })
+</script>
+</body>
+</html>

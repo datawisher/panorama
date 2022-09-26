@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>创建一个vue实例</title>
+    <script src="../js/vue.js" type="text/javascript" charset="UTF-8"></script>
+</head>
+<body>
+    <div id="demo">
+        {{ message }}
+    </div>
+    <script type="text/javascript">
+        var demo = new Vue({
+            el: '#demo',
+            data: {
+                message: 'Hello Vue2'
+            }
+        })
+    </script>
+</body>
+</html>
