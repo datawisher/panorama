@@ -1,5 +1,8 @@
 package com.datawisher.bee.system.user.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.datawisher.bee.common.model.constant.StatusCode;
 import com.datawisher.bee.common.model.dto.Result;
 import com.datawisher.bee.common.model.exception.SystemException;
@@ -29,10 +32,13 @@ public class SysUserController {
     private ISysUserService sysUserService;
 
     @GetMapping
-    @ApiOperation(value = "用户查询")
-    public Result<?> findAllSysUser() {
-        List<SysUser> sysUserList = sysUserService.list();
-        return Result.ok(sysUserList);
+    @ApiOperation(value = "用户分页查询")
+    public Result<?> findSysUserByPage(SysUser sysUser,
+                                    @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
+                                    @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
+        Page<SysUser> page = new Page<>(pageNo, pageSize);
+        IPage<SysUser> result = sysUserService.page(page, Wrappers.query(sysUser));
+        return Result.ok(result);
     }
 
     @PostMapping
