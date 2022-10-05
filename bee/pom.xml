@@ -13,6 +13,7 @@
     <modules>
         <module>bee-common</module>
         <module>bee-system</module>
+        <module>bee-auth</module>
     </modules>
 
 
@@ -27,6 +28,7 @@
         <mybatis-plus.version>3.5.1</mybatis-plus.version>
         <mybatis-plus-generator.version>3.5.3</mybatis-plus-generator.version>
         <springfox.version>3.0.0</springfox.version>
+        <fast-json.version>2.0.6</fast-json.version>
     </properties>
 
     <dependencyManagement>
@@ -71,6 +73,12 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-generator</artifactId>
                 <version>${mybatis-plus-generator.version}</version>
+            </dependency>
+            <!-- fast-json -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fast-json.version}</version>
             </dependency>
 
             <dependency>
