@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: bee-system
+  cloud:
+    nacos:
+      config:
+        server-addr: jim-aliyun:8848
+        namespace: bee
+        file-extension: yaml
