@@ -29,6 +29,8 @@
         <mybatis-plus-generator.version>3.5.3</mybatis-plus-generator.version>
         <springfox.version>3.0.0</springfox.version>
         <fast-json.version>2.0.6</fast-json.version>
+        <xxl-job.version>2.3.1</xxl-job.version>
+        <poi-tl.version>1.12.0</poi-tl.version>
     </properties>
 
     <dependencyManagement>
@@ -79,6 +81,18 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fast-json.version}</version>
+            </dependency>
+            <!-- xxl-job -->
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>${xxl-job.version}</version>
+            </dependency>
+            <!-- poi-tl -->
+            <dependency>
+                <groupId>com.deepoove</groupId>
+                <artifactId>poi-tl</artifactId>
+                <version>${poi-tl.version}</version>
             </dependency>
 
             <dependency>
