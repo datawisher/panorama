@@ -14,6 +14,7 @@
         <module>bee-common</module>
         <module>bee-system</module>
         <module>bee-auth</module>
+        <module>bee-voice</module>
     </modules>
 
 
@@ -31,6 +32,9 @@
         <fast-json.version>2.0.6</fast-json.version>
         <xxl-job.version>2.3.1</xxl-job.version>
         <poi-tl.version>1.12.0</poi-tl.version>
+
+        <junit-jupiter.version>5.6.0</junit-jupiter.version>
+
     </properties>
 
     <dependencyManagement>
@@ -117,6 +121,18 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

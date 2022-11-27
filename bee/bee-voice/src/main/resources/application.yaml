@@ -1,0 +1,19 @@
+server:
+  port: 9988
+
+spring:
+  rabbitmq:
+    host: "124.220.221.57"
+    port: 5672
+    username: "admin"
+    password: "x1ZPWO1ddhdwg8ZEPM2m"
+    virtual-host: "/"
+    listener:
+      simple:
+        retry:
+          enabled: true
+
+voice:
+  spot: "speaker1"
+  save: false
+  path: "C:/VoiceStore/"
