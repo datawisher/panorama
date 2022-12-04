@@ -1,24 +1,42 @@
 package com.datawisher.bee.voice.service;
 
+import com.datawisher.bee.voice.config.VoiceProperties;
 import com.datawisher.bee.voice.model.VoiceModel;
+import com.datawisher.bee.voice.ui.home.HomeFrame;
 import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.Dispatch;
 import com.jacob.com.Variant;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.apache.commons.lang3.math.NumberUtils;
+import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * @author h407644
  * @date 2022-11-25
  */
-@Component
-public class JacobVoiceService {
+@Service
+public class JacobVoiceService implements VoiceService {
+    private final HomeFrame homeFrame;
+    private final VoiceProperties voiceProperties;
 
-    @Value("${voice.path}")
-    private String voicePath;
+    public JacobVoiceService(HomeFrame homeFrame, VoiceProperties voiceProperties) {
+        this.homeFrame = homeFrame;
+        this.voiceProperties = voiceProperties;
+    }
+
+    @Override
+    public void playAndSaveVoice(VoiceModel voiceModel) {
+        // 调用TTS进行语音播放
+        playVoice(voiceModel);
+        // 根据操作是否存储音频
+        String selectedItem = (String) homeFrame.getVoiceCbx().getSelectedItem();
+        if ("存储".equalsIgnoreCase(selectedItem)) {
+            saveVoice(voiceModel);
+        }
+    }
 
     /**
      * 播放语音
@@ -28,9 +46,25 @@ public class JacobVoiceService {
         // 微软SAPI接口
         ax = new ActiveXComponent("Sapi.SpVoice");
         // 音量 0-100
-        ax.setProperty("Volume", new Variant(voiceModel.getVolume()));
+        Integer volume = voiceModel.getVolume();
+        if (Objects.isNull(volume)) {
+            String volumeText = homeFrame.getVolumeTxf().getText();
+            if (NumberUtils.isParsable(volumeText)) {
+                ax.setProperty("Volume", new Variant(Integer.parseInt(volumeText)));
+            }
+        } else {
+            ax.setProperty("Volume", new Variant(volume));
+        }
         // 语速 -10 到 +10
-        ax.setProperty("Rate", new Variant(voiceModel.getRate()));
+        Integer rate = voiceModel.getRate();
+        if (Objects.isNull(rate)) {
+            String rateText = homeFrame.getRateTxf().getText();
+            if (NumberUtils.isParsable(rateText)) {
+                ax.setProperty("Rate", new Variant(Integer.parseInt(rateText)));
+            }
+        } else {
+            ax.setProperty("Rate", new Variant(voiceModel.getRate()));
+        }
         // 调用 spVoice 播报
         Dispatch spVoice = ax.getObject();
         Dispatch.call(spVoice, "Speak", new Variant(voiceModel.getTextContent()));
@@ -41,7 +75,7 @@ public class JacobVoiceService {
     /**
      * 生成语音文件
      */
-    public void saveVoice(VoiceModel voiceModel) {
+    public String saveVoice(VoiceModel voiceModel) {
         ActiveXComponent ax;
         // 生成语音流
         ax = new ActiveXComponent("Sapi.SpFileStream");
@@ -55,15 +89,15 @@ public class JacobVoiceService {
         // 创建一个语音文件
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         String fileName = "voice" + dateFormat.format(new Date()) + ".wav";
-        String path = voicePath + fileName;
+        String path = voiceProperties.getPath() + fileName;
         Dispatch.call(spFileStream, "Open", new Variant(path), new Variant(3), new Variant(false));
 
         // 设置声音对象的音频输出流为输出文件对象
         ax = new ActiveXComponent("Sapi.SpVoice");
         Dispatch spVoice = ax.getObject();
         Dispatch.putRef(spVoice, "AudioOutputStream", spFileStream);
-        Dispatch.put(spVoice,"Volume", new Variant(voiceModel.getVolume()));
-        Dispatch.put(spVoice,"Rate", new Variant(voiceModel.getRate()));
+        Dispatch.put(spVoice, "Volume", new Variant(voiceModel.getVolume()));
+        Dispatch.put(spVoice, "Rate", new Variant(voiceModel.getRate()));
         Dispatch.call(spVoice, "Speak", new Variant(voiceModel.getTextContent()));
         // 关闭输出文件
         Dispatch.call(spFileStream, "Close");
@@ -72,6 +106,7 @@ public class JacobVoiceService {
         spFileStream.safeRelease();
         spVoice.safeRelease();
         ax.safeRelease();
+        return path;
     }
 
 }

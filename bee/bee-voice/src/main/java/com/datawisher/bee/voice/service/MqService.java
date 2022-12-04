@@ -5,8 +5,6 @@ import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,21 +14,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class MqService {
 
-    @Value("${voice.save}")
-    private Boolean voiceSave;
+    private final JacobVoiceService jacobVoiceService;
 
-    @Autowired
-    private JacobVoiceService jacobVoiceService;
+    public MqService(JacobVoiceService jacobVoiceService) {
+        this.jacobVoiceService = jacobVoiceService;
+    }
 
     @RabbitListener(bindings = {@QueueBinding(value = @Queue(value = "${voice.spot}", durable = "false"),
             exchange = @Exchange(value = "speaker.exchange"),
             key = "${voice.spot}")})
-    public void processText(VoiceModel data) {
+    public void processText(VoiceModel voiceModel) {
         try {
-            jacobVoiceService.playVoice(data);
-            if (voiceSave) {
-                jacobVoiceService.saveVoice(data);
-            }
+            jacobVoiceService.playAndSaveVoice(voiceModel);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
