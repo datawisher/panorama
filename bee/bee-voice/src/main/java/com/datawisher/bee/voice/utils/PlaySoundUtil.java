@@ -1,15 +1,10 @@
-package com.datawisher.bee.voice.util;
+package com.datawisher.bee.voice.utils;
 
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * @author h407644
- * @date 2022-12-04
- */
 public class PlaySoundUtil {
-
     public static void play(String filePath) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         //1 获取你要播放的音乐文件
         File file = new File(filePath);
@@ -38,11 +33,11 @@ public class PlaySoundUtil {
             sumByteRead = am.read(b, 0, b.length);//12、读取哪个数组
             if (sumByteRead >= 0) {//13、读取了之后将数据写入混频器,开始播放
                 sd.write(b, 0, b.length);
-
             }
         }
         //关闭
         sd.drain();
         sd.close();
+        am.close();
     }
 }

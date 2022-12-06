@@ -19,7 +19,7 @@ public class VoiceProperties {
     /**
      * 音频路径
      */
-    private String path = "C:/VoiceStore/";
+    private String directory = "C:/VoiceStore";
     /**
      * 播放音量
      */
@@ -28,5 +28,9 @@ public class VoiceProperties {
      * 播放速率
      */
     private Integer rate = -2;
+    /**
+     * 倍率音量
+     */
+    private Float ratio = 7f;
 
 }

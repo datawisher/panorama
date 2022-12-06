@@ -20,6 +20,8 @@ public class HomeFrame extends JFrame {
     private JTextField rateTxf;
     private JComboBox<String> voiceCbx;
     private JTextArea testTextArea;
+    private JTextField ratioTxf;
+    private JTextField dirTxf;
     private JButton confirmBtn;
     private JButton testBtn;
 
@@ -31,10 +33,21 @@ public class HomeFrame extends JFrame {
     }
 
     private void initializeFrame() {
+        // 初始化UI界面
+        initUI();
+        // 添加系统图标
+        systemIcon();
+        // 添加系统托盘
+        systemTray();
+        // 添加窗口监听
+        windowListener();
+    }
+
+    private void initUI() {
         setResizable(false);
         setTitle("语音播放");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        setBounds(100, 100, 450, 456);
+        setBounds(100, 100, 437, 504);
         JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -52,10 +65,10 @@ public class HomeFrame extends JFrame {
         contentPane.add(spotLbl);
 
         spotTxf = new JTextField();
+        spotTxf.setEditable(false);
         spotTxf.setBounds(62, 93, 119, 25);
         contentPane.add(spotTxf);
         spotTxf.setColumns(10);
-        spotTxf.setEditable(false);
 
         JLabel volumeLbl = new JLabel("音量");
         volumeLbl.setFont(new Font("微软雅黑", Font.PLAIN, 12));
@@ -67,7 +80,7 @@ public class HomeFrame extends JFrame {
         volumeTxf.setBounds(283, 93, 119, 25);
         contentPane.add(volumeTxf);
 
-        JLabel rateLbl = new JLabel("速率");
+        JLabel rateLbl = new JLabel("音速");
         rateLbl.setFont(new Font("微软雅黑", Font.PLAIN, 12));
         rateLbl.setBounds(24, 151, 38, 22);
         contentPane.add(rateLbl);
@@ -88,26 +101,40 @@ public class HomeFrame extends JFrame {
         voiceCbx.setBounds(283, 148, 119, 26);
         contentPane.add(voiceCbx);
 
+        JLabel ratioLbl = new JLabel("倍率");
+        ratioLbl.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+        ratioLbl.setBounds(24, 207, 38, 22);
+        contentPane.add(ratioLbl);
+
+        ratioTxf = new JTextField();
+        ratioTxf.setColumns(10);
+        ratioTxf.setBounds(62, 207, 119, 25);
+        contentPane.add(ratioTxf);
+
+        JLabel pathLbl = new JLabel("路径");
+        pathLbl.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+        pathLbl.setBounds(245, 207, 38, 22);
+        contentPane.add(pathLbl);
+
+        dirTxf = new JTextField();
+        dirTxf.setEditable(false);
+        dirTxf.setColumns(10);
+        dirTxf.setBounds(283, 207, 119, 25);
+        contentPane.add(dirTxf);
+
         testTextArea = new JTextArea();
-        testTextArea.setBounds(24, 231, 378, 104);
+        testTextArea.setBounds(24, 277, 378, 104);
         contentPane.add(testTextArea);
 
         confirmBtn = new JButton("确定");
         confirmBtn.setFont(new Font("微软雅黑", Font.PLAIN, 10));
-        confirmBtn.setBounds(78, 365, 71, 21);
+        confirmBtn.setBounds(76, 413, 71, 26);
         contentPane.add(confirmBtn);
 
         testBtn = new JButton("测试");
         testBtn.setFont(new Font("微软雅黑", Font.PLAIN, 10));
-        testBtn.setBounds(248, 365, 71, 21);
+        testBtn.setBounds(252, 413, 71, 26);
         contentPane.add(testBtn);
-
-        // 添加系统图标
-        systemIcon();
-        // 添加系统托盘
-        systemTray();
-        // 添加窗口监听
-        windowListener();
     }
 
     private void systemIcon() {

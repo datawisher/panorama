@@ -1,17 +1,22 @@
 package com.datawisher.bee.voice.service;
 
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.util.IdUtil;
 import com.datawisher.bee.voice.config.VoiceProperties;
 import com.datawisher.bee.voice.model.VoiceModel;
 import com.datawisher.bee.voice.ui.home.HomeFrame;
+import com.datawisher.bee.voice.utils.PlaySoundUtil;
+import com.datawisher.bee.voice.utils.RaiseVolumeUtil;
+import com.google.common.base.Joiner;
 import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.Dispatch;
 import com.jacob.com.Variant;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Objects;
+import java.io.File;
+import java.util.Arrays;
 
 /**
  * @author h407644
@@ -28,13 +33,33 @@ public class JacobVoiceService implements VoiceService {
     }
 
     @Override
-    public void playAndSaveVoice(VoiceModel voiceModel) {
-        // 调用TTS进行语音播放
-        playVoice(voiceModel);
-        // 根据操作是否存储音频
-        String selectedItem = (String) homeFrame.getVoiceCbx().getSelectedItem();
-        if ("存储".equalsIgnoreCase(selectedItem)) {
-            saveVoice(voiceModel);
+    public void playAndSaveVoice(VoiceModel voiceModel) throws Exception {
+        // 保存原始的音频文件
+        String originalVoicePath = saveOriginalVoice(voiceModel);
+        if (StringUtils.isNotBlank(originalVoicePath)) {
+            String dirValue = voiceProperties.getDirectory();
+            String dirText = homeFrame.getDirTxf().getText();
+            if (StringUtils.isNotBlank(dirText)) {
+                dirValue = dirText;
+            }
+            Float ratioValue = voiceProperties.getRatio();
+            String ratioText = homeFrame.getRatioTxf().getText();
+            if (StringUtils.isNotBlank(ratioText)) {
+                ratioValue = NumberUtils.toFloat(ratioText, voiceProperties.getRatio());
+            }
+            // 生成扩音后的音频文件
+            String raiseVoicePath = RaiseVolumeUtil.raiseByRatio(originalVoicePath, dirValue, ratioValue);
+            if (StringUtils.isNotBlank(raiseVoicePath)) {
+                // 删除原始的音频文件
+                FileUtil.del(originalVoicePath);
+                // 播放扩音后的语音消息
+                PlaySoundUtil.play(raiseVoicePath);
+            }
+            // 是否存储扩音的音频文件
+            String selectedItem = (String) homeFrame.getVoiceCbx().getSelectedItem();
+            if ("丢弃".equalsIgnoreCase(selectedItem)) {
+                FileUtil.del(raiseVoicePath);
+            }
         }
     }
 
@@ -46,24 +71,18 @@ public class JacobVoiceService implements VoiceService {
         // 微软SAPI接口
         ax = new ActiveXComponent("Sapi.SpVoice");
         // 音量 0-100
-        Integer volume = voiceModel.getVolume();
-        if (Objects.isNull(volume)) {
-            String volumeText = homeFrame.getVolumeTxf().getText();
-            if (NumberUtils.isParsable(volumeText)) {
-                ax.setProperty("Volume", new Variant(Integer.parseInt(volumeText)));
-            }
+        String volumeText = homeFrame.getVolumeTxf().getText();
+        if (NumberUtils.isParsable(volumeText)) {
+            ax.setProperty("Volume", new Variant(Integer.parseInt(volumeText)));
         } else {
-            ax.setProperty("Volume", new Variant(volume));
+            ax.setProperty("Volume", new Variant(voiceProperties.getVolume()));
         }
         // 语速 -10 到 +10
-        Integer rate = voiceModel.getRate();
-        if (Objects.isNull(rate)) {
-            String rateText = homeFrame.getRateTxf().getText();
-            if (NumberUtils.isParsable(rateText)) {
-                ax.setProperty("Rate", new Variant(Integer.parseInt(rateText)));
-            }
+        String rateText = homeFrame.getRateTxf().getText();
+        if (NumberUtils.isParsable(rateText)) {
+            ax.setProperty("Rate", new Variant(Integer.parseInt(rateText)));
         } else {
-            ax.setProperty("Rate", new Variant(voiceModel.getRate()));
+            ax.setProperty("Rate", new Variant(voiceProperties.getRate()));
         }
         // 调用 spVoice 播报
         Dispatch spVoice = ax.getObject();
@@ -75,7 +94,7 @@ public class JacobVoiceService implements VoiceService {
     /**
      * 生成语音文件
      */
-    public String saveVoice(VoiceModel voiceModel) {
+    public String saveOriginalVoice(VoiceModel voiceModel) {
         ActiveXComponent ax;
         // 生成语音流
         ax = new ActiveXComponent("Sapi.SpFileStream");
@@ -87,18 +106,34 @@ public class JacobVoiceService implements VoiceService {
         // 设置文件输出流格式
         Dispatch.putRef(spFileStream, "Format", spAudioFormat);
         // 创建一个语音文件
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-        String fileName = "voice" + dateFormat.format(new Date()) + ".wav";
-        String path = voiceProperties.getPath() + fileName;
+        String dirValue = voiceProperties.getDirectory();
+        String dirText = homeFrame.getDirTxf().getText();
+        if (StringUtils.isNotBlank(dirText)) {
+            dirValue = dirText;
+        }
+        String path = Joiner.on(File.separator).join(Arrays.asList(dirValue, IdUtil.simpleUUID() + "." + ".wav"));
         Dispatch.call(spFileStream, "Open", new Variant(path), new Variant(3), new Variant(false));
-
         // 设置声音对象的音频输出流为输出文件对象
         ax = new ActiveXComponent("Sapi.SpVoice");
         Dispatch spVoice = ax.getObject();
         Dispatch.putRef(spVoice, "AudioOutputStream", spFileStream);
-        Dispatch.put(spVoice, "Volume", new Variant(voiceModel.getVolume()));
-        Dispatch.put(spVoice, "Rate", new Variant(voiceModel.getRate()));
         Dispatch.call(spVoice, "Speak", new Variant(voiceModel.getTextContent()));
+        // 音量 0-100
+        String volumeText = homeFrame.getVolumeTxf().getText();
+        if (NumberUtils.isParsable(volumeText)) {
+            ax.setProperty("Volume", new Variant(Integer.parseInt(volumeText)));
+            Dispatch.put(spVoice, "Volume", new Variant(Integer.parseInt(volumeText)));
+        } else {
+            Dispatch.put(spVoice, "Volume", new Variant(voiceProperties.getVolume()));
+        }
+        // 语速 -10 到 +10
+        String rateText = homeFrame.getRateTxf().getText();
+        if (NumberUtils.isParsable(rateText)) {
+            Dispatch.put(spVoice, "Rate", new Variant(Integer.parseInt(rateText)));
+        } else {
+            Dispatch.put(spVoice, "Rate", new Variant(voiceProperties.getRate()));
+        }
+
         // 关闭输出文件
         Dispatch.call(spFileStream, "Close");
         Dispatch.putRef(spVoice, "AudioOutputStream", null);
@@ -106,6 +141,7 @@ public class JacobVoiceService implements VoiceService {
         spFileStream.safeRelease();
         spVoice.safeRelease();
         ax.safeRelease();
+
         return path;
     }
 

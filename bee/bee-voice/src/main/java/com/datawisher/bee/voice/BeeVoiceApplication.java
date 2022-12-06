@@ -1,13 +1,26 @@
 package com.datawisher.bee.voice;
 
-
-import org.springframework.boot.SpringApplication;
+import com.datawisher.bee.voice.ui.home.HomeController;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.ConfigurableApplicationContext;
+
+import java.awt.*;
 
 @SpringBootApplication
 public class BeeVoiceApplication {
 
+
     public static void main(String[] args) {
-        SpringApplication.run(BeeVoiceApplication.class, args);
+        SpringApplicationBuilder builder = new SpringApplicationBuilder(BeeVoiceApplication.class);
+        ConfigurableApplicationContext context = builder.headless(false)
+                .web(WebApplicationType.NONE)
+                .run(args);
+
+        EventQueue.invokeLater(() -> {
+            HomeController homeController = context.getBean(HomeController.class);
+            homeController.prepareAndOpenFrame();
+        });
     }
 }

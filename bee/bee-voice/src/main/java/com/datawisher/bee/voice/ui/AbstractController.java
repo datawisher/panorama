@@ -4,10 +4,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.TableModel;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemListener;
-import java.awt.event.KeyListener;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
 
 public abstract class AbstractController {
     public abstract void prepareAndOpenFrame();
@@ -22,6 +19,10 @@ public abstract class AbstractController {
 
     protected void registerAction(JComponent component, KeyListener listener) {
         component.addKeyListener(listener);
+    }
+
+    protected void registerAction(JComponent component, MouseListener listener) {
+        component.addMouseListener(listener);
     }
 
     protected void registerAction(JTextField textField, DocumentListener listener) {
