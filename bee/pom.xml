@@ -15,6 +15,7 @@
         <module>bee-system</module>
         <module>bee-auth</module>
         <module>bee-voice</module>
+        <module>bee-gateway</module>
     </modules>
 
 
