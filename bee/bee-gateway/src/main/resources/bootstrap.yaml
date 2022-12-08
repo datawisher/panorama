@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: bee-gateway
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      config:
+        namespace: bee
+        file-extension: yaml
+      discovery:
+        namespace: bee
