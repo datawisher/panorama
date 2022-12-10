@@ -1,12 +1,7 @@
 package com.datawisher.bee.gateway.service;
 
 import com.alibaba.cloud.nacos.NacosConfigManager;
-import com.alibaba.cloud.nacos.NacosConfigProperties;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.nacos.api.annotation.NacosInjected;
-import com.alibaba.nacos.api.config.ConfigService;
-import com.alibaba.nacos.api.config.ConfigType;
-import com.alibaba.nacos.api.config.annotation.NacosConfigListener;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
@@ -53,6 +48,7 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
 
     @PostConstruct
     public void init() throws Exception {
+        // nacos配置监听器
         nacosConfigManager.getConfigService().addListener(ROUTE_DATA_ID, DEFAULT_GROUP, new Listener() {
             @Override
             public Executor getExecutor() {
@@ -65,13 +61,18 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
                 routeConfigInfo(configInfo);
             }
         });
+
+        // 启动获取路由配置并启用
+        String config = nacosConfigManager.getConfigService().getConfig(ROUTE_DATA_ID, DEFAULT_GROUP, 30000);
+        this.routeConfigInfo(config);
+
     }
 
     /**
      * 监听nacos路由配置，动态改变路由
      * @param configInfo
      */
-    public void routeConfigInfo(String configInfo) {
+    private void routeConfigInfo(String configInfo) {
         clearRoute();
         try {
             List<RouteDefinition> gatewayRouteDefinitions = JSON.parseArray(configInfo, RouteDefinition.class);
