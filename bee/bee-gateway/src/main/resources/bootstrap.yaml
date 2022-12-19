@@ -9,3 +9,8 @@ spring:
         file-extension: yaml
       discovery:
         namespace: bee
+  redis:
+    password: rv7g2mWuetvjwbd7
+    host: 47.103.21.83
+    port: 6379
+    database: 0
