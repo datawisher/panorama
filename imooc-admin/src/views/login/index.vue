@@ -34,7 +34,6 @@
 <script setup>
 // 导入组件可直接使用
 import SvgIcon from '@/components/SvgIcon/index.vue'
-import {} from 'vue'
 </script>
 
 <style lang="scss" scoped>
