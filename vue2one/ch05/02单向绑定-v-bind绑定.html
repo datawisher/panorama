@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>单向绑定-v-bind绑定</title>
+  <script src="../js/vue.js" type="text/javascript" charset="UTF-8"></script>
+</head>
+<body>
+<div id="app">
+  <p v-bind:class="jumooc">Hello, {{ name }}</p>
+</div>
+
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            name: 'Vue 之旅',
+            jumooc: 'red'
+        }
+    })
+</script>
+<style>
+    .red {
+        background: red;
+    }
+
+    .blue {
+        background: blue;
+    }
+</style>
+</body>
+</html>

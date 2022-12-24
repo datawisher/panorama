@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>计算属性</title>
+  <script src="../js/vue.js" type="text/javascript" charset="UTF-8"></script>
+</head>
+<body>
+<div id="app">
+  <table>
+    <tr>
+      <!-- computed中的函数直接当成属性用，不可以加括号() !!! -->
+      <td>生日：</td>
+      <td>{{ getBirthday }}</td>
+    </tr>
+    <tr>
+      <td>年龄：</td>
+      <td>{{ age }}</td>
+    </tr>
+    <tr>
+      <td>地址：</td>
+      <td>{{ address }}</td>
+    </tr>
+  </table>
+</div>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            birthday: 1014228510514,
+            age: 18,
+            address: '北京海淀区'
+        },
+        computed: {
+            getBirthday() {
+                var m = new Date(this.birthday);
+                return m.getFullYear() + '年' + m.getMonth() + '月' + m.getDay() + '日';
+            }
+        }
+    })
+</script>
+</body>
+</html>
