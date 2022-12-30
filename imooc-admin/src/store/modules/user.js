@@ -11,7 +11,7 @@ export default {
      * @param userInfo
      * @returns {Promise<unknown>}
      */
-    login(context, userInfo) {
+    login (context, userInfo) {
       const { username, password } = userInfo
       return new Promise((resolve, reject) => {
         login({
