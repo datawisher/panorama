@@ -15,7 +15,7 @@ module.exports = {
     proxy: {
       // 当地址中包含 /api 的时候，触发此代理
       '/api': {
-        target: 'https://api.imooc-admin.lgdsunday.club/',
+        target: 'http://localhost:7011/',
         changeOrigin: true
       }
     }
