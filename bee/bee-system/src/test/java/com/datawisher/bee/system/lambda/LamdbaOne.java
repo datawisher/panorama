@@ -63,4 +63,12 @@ public class LamdbaOne {
 
     }
 
+    @Test
+    public void testMultiOperation() {
+        System.out.println("groupModels = " + groupModels);
+        GroupModel groupModel = groupModels.stream().filter(e -> e.getNum() == 2).findFirst().orElse(new GroupModel("F", 8));
+        System.out.println("groupModel1 = " + groupModel);
+        groupModel = groupModels.stream().filter(e -> e.getNum() == 5).findFirst().orElse(new GroupModel("F", 8));
+        System.out.println("groupModel2 = " + groupModel);
+    }
 }
