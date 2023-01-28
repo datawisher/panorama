@@ -3,7 +3,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 /**
  * 公开路由表
  */
-const publicRoutes = [
+export const publicRoutes = [
   {
     path: '/login',
     component: () => import('@/views/login/index')

@@ -1,13 +1,10 @@
 <template>
-
+  <div class="">Sidebar</div>
 </template>
 
-<script>
-export default {
-  name: 'index'
-}
+<script setup>
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

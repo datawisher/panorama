@@ -15,7 +15,7 @@ module.exports = {
     proxy: {
       // 当地址中包含 /api 的时候，触发此代理
       '/api': {
-        target: 'http://localhost:7011/',
+        target: 'http://47.103.21.83:7011/',
         changeOrigin: true
       }
     }
