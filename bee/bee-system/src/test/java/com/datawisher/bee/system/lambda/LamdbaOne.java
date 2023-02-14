@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import io.swagger.models.auth.In;
+
 /**
  * @author h407644
  * @date 2022-11-30
@@ -14,6 +16,7 @@ public class LamdbaOne {
 
     List<GroupModel> groupModels = new ArrayList<>();
     List<Integer> dataList = new ArrayList<>();
+    List<Integer> dataList2 = new ArrayList<>();
     List<Map<String, Object>> dataMaps = new ArrayList<>();
 
     @BeforeEach
@@ -27,6 +30,7 @@ public class LamdbaOne {
 
         // List<Integer>
         dataList = Arrays.asList(1, 1, 1, 1, 1);
+        dataList2 = Arrays.asList(1,1,2,3,6,6);
 
         // Map
         Map<String, Object> dataMap = new HashMap<>();
@@ -70,5 +74,13 @@ public class LamdbaOne {
         System.out.println("groupModel1 = " + groupModel);
         groupModel = groupModels.stream().filter(e -> e.getNum() == 5).findFirst().orElse(new GroupModel("F", 8));
         System.out.println("groupModel2 = " + groupModel);
+    }
+
+    @Test
+    public void testMinRecords() {
+        Integer integer = dataList2.stream().sorted().findFirst().orElse(null);
+        System.out.println("integer = " + integer);
+        int i = dataList2.indexOf(3);
+        System.out.println("i = " + i);
     }
 }
