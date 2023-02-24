@@ -1,3 +1,5 @@
+// 头部引用
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
 const path = require('path')
 
 function resolve (dir) {
@@ -5,7 +7,7 @@ function resolve (dir) {
 }
 
 module.exports = {
-  lintOnSave: false,
+  // lintOnSave: false,
   // webpack devServer 提供了代理的功能，该代理可以把所有请求到当前服务中的请求转发（代理）到另外的一个服务器上
   devServer: {
     proxy: {
@@ -25,6 +27,9 @@ module.exports = {
       //   }
       // }
     }
+  },
+  configureWebpack: {
+    plugins: [new NodePolyfillPlugin()]
   },
   chainWebpack (config) {
     // 设置 svg-sprite-loader
