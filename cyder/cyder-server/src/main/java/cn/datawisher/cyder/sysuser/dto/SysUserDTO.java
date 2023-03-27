@@ -1,16 +1,11 @@
-package cn.datawisher.cyder.sysuser.entity;
+package cn.datawisher.cyder.sysuser.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-
 import cn.datawisher.cyder.sysuser.constant.SexEnum;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 /**
  * <p>
@@ -20,17 +15,16 @@ import lombok.Setter;
  * @author Jim Han
  * @since 2023-03-24
  */
-@Getter
-@Setter
-@TableName("sys_user")
-public class SysUser implements Serializable {
+@Data
+public class SysUserDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
     private String username;
+
+    private String usernameLikeQuery;
 
     private String password;
 
@@ -39,6 +33,8 @@ public class SysUser implements Serializable {
     private String email;
 
     private String realName;
+
+    private String realNameLikeQuery;
 
     private LocalDate birthday;
 
@@ -55,4 +51,5 @@ public class SysUser implements Serializable {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
 }

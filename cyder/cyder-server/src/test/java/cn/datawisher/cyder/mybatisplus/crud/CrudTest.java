@@ -5,7 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson2.JSONWriter;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import cn.datawisher.cyder.sysuser.entity.SysUser;
 import cn.datawisher.cyder.sysuser.mapper.SysUserMapper;
@@ -27,7 +30,6 @@ public class CrudTest {
     }
 
     @Test
-
     public void testUpdate() {
         mapper.update(
                 null,
@@ -35,6 +37,13 @@ public class CrudTest {
                         .set(SysUser::getAddress, "上海")
                         .eq(SysUser::getId, 1639514393509138434L)
         );
+    }
+
+    @Test
+    public void testSelect() {
+        Page<SysUser> page = new Page<>(2, 5);
+        Page<SysUser> sysUserPage = mapper.selectPage(page, null);
+        System.out.println(JSONObject.toJSONString(sysUserPage, JSONWriter.Feature.WriteNulls));
     }
 
 }

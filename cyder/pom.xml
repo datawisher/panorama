@@ -22,6 +22,7 @@
         <spring-boot.version>3.0.5</spring-boot.version>
         <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
         <velocity.version>2.3</velocity.version>
+        <fastjson2.version>2.0.26</fastjson2.version>
         <junit-jupiter.version>5.9.2</junit-jupiter.version>
     </properties>
 
@@ -57,6 +58,11 @@
                 <artifactId>velocity-engine-core</artifactId>
                 <version>${velocity.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -87,6 +93,15 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/mapper/xml/*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 
 </project>
