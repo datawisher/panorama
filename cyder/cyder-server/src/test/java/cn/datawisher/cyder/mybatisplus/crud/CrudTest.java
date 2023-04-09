@@ -10,8 +10,8 @@ import com.alibaba.fastjson2.JSONWriter;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
-import cn.datawisher.cyder.sysuser.entity.SysUser;
-import cn.datawisher.cyder.sysuser.mapper.SysUserMapper;
+import cn.datawisher.cyder.system.user.entity.SysUser;
+import cn.datawisher.cyder.system.user.mapper.SysUserMapper;
 
 @SpringBootTest
 public class CrudTest {
