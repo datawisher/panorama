@@ -1,14 +1,14 @@
 server:
   port: 7011
   servlet:
-    context-path: /api
+    context-path: /cyder
 
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: 123456
-    url: jdbc:mysql://localhost:3306/cyder?characterEncoding=utf-8
+    username: momuser
+    password: momuser
+    url: jdbc:mysql://47.103.21.83:3306/cyder?characterEncoding=utf-8
 
 mybatis-plus:
   global-config:
