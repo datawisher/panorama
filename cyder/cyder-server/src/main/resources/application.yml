@@ -6,9 +6,14 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: momuser
-    password: momuser
+    username: ENC(beP09vEROJfvNCN7KVwZS6EAuCtcG2XqS9phC3C/cgUq93iuxpXlRr4cU/oJ1LBR)
+    password: ENC(glirxHjw+WloN0azcwyyBSpSBFM1YsqH0ut8HmfHOoIotuMSyhRH+KjBaHl+B9HZ)
     url: jdbc:mysql://47.103.21.83:3306/cyder?characterEncoding=utf-8
+  data:
+    redis:
+      host: 47.103.21.83
+      port: 6379
+      password: ENC(TwpaO4JW07OBxrxkqw3URlNC4iyroqGAEihAuTgKNhOpY/y3deHNBiqPzPlApswXwtZ5KR/NwoqWc+ns240hgQ==)
 
 mybatis-plus:
   global-config:
@@ -19,6 +24,12 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath*:cn/datawisher/cyder/**/mapper/xml/*.xml
+
+
+jasypt:
+  encryptor:
+    password: ${jasyptp}
+    bootstrap: true
 
 tushare:
   api:

@@ -24,6 +24,7 @@
         <velocity.version>2.3</velocity.version>
         <fastjson2.version>2.0.26</fastjson2.version>
         <hutool.version>5.8.16</hutool.version>
+        <jasypt.version>3.0.4</jasypt.version>
         <junit-jupiter.version>5.9.2</junit-jupiter.version>
     </properties>
 
@@ -63,6 +64,12 @@
                 <groupId>com.alibaba.fastjson2</groupId>
                 <artifactId>fastjson2</artifactId>
                 <version>${fastjson2.version}</version>
+            </dependency>
+            <!-- jasypt -->
+            <dependency>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-spring-boot-starter</artifactId>
+                <version>${jasypt.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
