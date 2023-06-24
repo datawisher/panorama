@@ -25,7 +25,7 @@ public class CrudTest {
         users.setUsername("fingerlake");
         users.setPassword("abbccddee");
         users.setEmail("hj_hanjing@163.com");
-        users.setRealName("张嘎子");
+        users.setRealname("张嘎子");
         mapper.insert(users);
     }
 
@@ -34,7 +34,7 @@ public class CrudTest {
         mapper.update(
                 null,
                 Wrappers.<SysUser>lambdaUpdate()
-                        .set(SysUser::getAddress, "上海")
+                        .set(SysUser::getRealname, "佩奇")
                         .eq(SysUser::getId, 1639514393509138434L)
         );
     }

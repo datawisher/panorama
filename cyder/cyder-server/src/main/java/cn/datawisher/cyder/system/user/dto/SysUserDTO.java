@@ -1,9 +1,9 @@
 package cn.datawisher.cyder.system.user.dto;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import cn.datawisher.cyder.system.user.constant.AccountStatusEnum;
 import cn.datawisher.cyder.system.user.constant.SexEnum;
 import lombok.Data;
 
@@ -24,32 +24,34 @@ public class SysUserDTO implements Serializable {
 
     private String username;
 
-    private String usernameLikeQuery;
-
     private String password;
+
+    private String salt;
+
+    private String realname;
 
     private SexEnum sex;
 
+    private String avatar;
+
     private String email;
 
-    private String realName;
+    private String mobile;
 
-    private String realNameLikeQuery;
+    private AccountStatusEnum status;
 
-    private LocalDate birthday;
+    private String deptCode;
 
-    private String address;
+    private Long createBy;
 
-    private String phoneNumber;
+    private LocalDateTime createTime;
 
-    private byte[] avatar;
+    private Long updateBy;
 
-    private Integer deleteStatus;
+    private LocalDateTime updateTime;
 
-    private LocalDateTime lastLogin;
+    private Long tenantId;
 
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
+    private Boolean delFlag;
 
 }

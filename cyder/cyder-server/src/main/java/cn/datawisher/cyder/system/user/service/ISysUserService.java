@@ -14,4 +14,5 @@ import cn.datawisher.cyder.system.user.entity.SysUser;
  */
 public interface ISysUserService extends IService<SysUser> {
 
+    SysUser getEntityById(Long id);
 }

@@ -5,6 +5,9 @@ import cn.datawisher.cyder.system.user.mapper.SysUserMapper;
 import cn.datawisher.cyder.system.user.service.ISysUserService;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,4 +21,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements ISysUserService {
 
+    @Cacheable(value = "myCache", key = "#id")
+    public SysUser getEntityById(Long id) {
+        return baseMapper.selectById(id);
+    }
 }

@@ -5,17 +5,19 @@ import java.io.Serializable;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
+import cn.datawisher.cyder.dto.Result;
 import cn.datawisher.cyder.system.user.dto.SysUserDTO;
 import cn.datawisher.cyder.system.user.entity.SysUser;
 import cn.datawisher.cyder.system.user.mapper.SysUserMapper;
+import cn.datawisher.cyder.system.user.service.ISysUserService;
 
 /**
  * <p>
@@ -30,15 +32,22 @@ import cn.datawisher.cyder.system.user.mapper.SysUserMapper;
 public class SysUserController {
 
     @Autowired
+    private ISysUserService sysUserService;
+
+    @Autowired
     private SysUserMapper mapper;
 
-    @GetMapping("/list")
+    @GetMapping("/page")
     public Page<SysUser> findSysUserByPage(Page<SysUser> page, SysUserDTO params) {
         SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(params, sysUser);
-        return mapper.selectPage(page, Wrappers.query(sysUser)
-                .like(params.getUsernameLikeQuery() != null, "username", params.getUsernameLikeQuery())
-                .like(params.getRealNameLikeQuery() != null, "real_name", params.getRealNameLikeQuery()));
+        return mapper.selectPage(page, null);
+    }
+
+    @GetMapping("/{id}")
+    public Result<?> getSysUserById(@PathVariable Long id) {
+        SysUser entityById = sysUserService.getEntityById(id);
+        return Result.ok(entityById);
     }
 
     @PostMapping("/delete")
