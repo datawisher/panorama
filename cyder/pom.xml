@@ -25,6 +25,7 @@
         <fastjson2.version>2.0.26</fastjson2.version>
         <hutool.version>5.8.16</hutool.version>
         <jasypt.version>3.0.4</jasypt.version>
+        <xxl-job.version>2.3.1</xxl-job.version>
         <junit-jupiter.version>5.9.2</junit-jupiter.version>
     </properties>
 
@@ -70,6 +71,12 @@
                 <groupId>com.github.ulisesbocchio</groupId>
                 <artifactId>jasypt-spring-boot-starter</artifactId>
                 <version>${jasypt.version}</version>
+            </dependency>
+            <!-- xxl-job -->
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>${xxl-job.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
