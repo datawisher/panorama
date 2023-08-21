@@ -41,3 +41,7 @@
 //   // abc
 
 // 5.
+function fn() {
+    console.log(arguments)
+}
+fn(1,3,4)
