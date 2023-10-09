@@ -61,3 +61,68 @@ function foo(name, options, arguments) {
 function foo(name, options, args) {
     // ...
 }
+
+
+// 7.6 不要使用 arguments, 选择使用 rest 语法 ... 代替。 eslint: prefer-rest-params
+// 为什么? ... 明确了你想要拉取什么参数。 更甚, rest 参数是一个真正的数组，而不仅仅是类数组的 arguments 。
+// bad
+function concatenateAll() {
+    const args = Array.prototype.slice.call(arguments);
+    return args.join('');
+}
+
+// good
+function concatenateAll(...args) {
+    return args.join('');
+}
+
+
+// 7.7 使用默认的参数语法，而不是改变函数参数。
+// really bad
+function handleThings(opts) {
+    // No! We shouldn’t mutate function arguments.
+    // Double bad: if opts is falsy it'll be set to an object which may
+    // be what you want but it can introduce subtle bugs.
+    opts = opts || {};
+    // ...
+}
+
+// still bad
+function handleThings(opts) {
+    if (opts === void 0) {
+        opts = {};
+    }
+    // ...
+}
+
+// good
+function handleThings(opts = {}) {
+    // ...
+}
+
+
+// 7.8 避免使用默认参数的副作用。
+// 为什么? 他们很容易混淆。
+var b = 1;
+// bad
+function count(a = b++) {
+    console.log(a);
+}
+count();  // 1
+count();  // 2
+count(3); // 3
+count();  // 3
+
+
+// 7.9 总是把默认参数放在最后。
+// bad
+function handleThings(opts = {}, name) {
+    // ...
+}
+
+// good
+function handleThings(name, opts = {}) {
+    // ...
+}
+
+
