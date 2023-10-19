@@ -125,4 +125,35 @@ function handleThings(name, opts = {}) {
     // ...
 }
 
+// 7.10 永远不要使用函数构造器来创建一个新函数。 eslint: no-new-func
+// 为什么? 以这种方式创建一个函数将对一个类似于 eval() 的字符串进行计算，这将打开漏洞。
+// bad
+var add = new Function('a', 'b', 'return a + b');
 
+// still bad
+var subtract = Function('a', 'b', 'return a - b');
+
+
+// 7.11 函数签名中的间距。 eslint: space-before-function-paren space-before-blocks
+// 为什么? 一致性很好，在删除或添加名称时不需要添加或删除空格。
+// bad
+const f = function(){};
+const g = function (){};
+const h = function() {};
+
+// good
+const x = function () {};
+const y = function a() {};
+
+
+// 7.12 没用变异参数。 eslint: no-param-reassign
+// 为什么? 将传入的对象作为参数进行操作可能会在原始调用程序中造成不必要的变量副作用。
+// bad
+function f1(obj) {
+    obj.key = 1;
+}
+
+// good
+function f2(obj) {
+    const key = Object.prototype.hasOwnProperty.call(obj, 'key') ? obj.key : 1;
+}
