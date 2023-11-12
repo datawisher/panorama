@@ -157,3 +157,26 @@ function f1(obj) {
 function f2(obj) {
     const key = Object.prototype.hasOwnProperty.call(obj, 'key') ? obj.key : 1;
 }
+
+// 7.13 不要再赋值参数。 eslint: no-param-reassign
+// 为什么? 重新赋值参数会导致意外的行为，尤其是在访问 arguments 对象的时候。 它还可能导致性能优化问题，尤其是在 V8 中。
+// bad
+function f1(a) {
+    a = 1;
+    // ...
+}
+
+function f2(a) {
+    if (!a) { a = 1; }
+    // ...
+}
+
+// good
+function f3(a) {
+    const b = a || 1;
+    // ...
+}
+
+function f4(a = 1) {
+    // ...
+}
