@@ -1,6 +1,15 @@
 import { createStore } from 'vuex'
+import cart from '@/store/modules/cart'
+import user from '@/store/modules/user'
+import category from '@/store/modules/category'
 
-const store = createStore({})
+const store = createStore({
+  modules: {
+    cart,
+    user,
+    category
+  }
+})
 
 // state() {
 //     return {
