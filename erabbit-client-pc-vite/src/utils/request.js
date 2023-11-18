@@ -45,3 +45,13 @@ instance.interceptors.response.use(
     return Promise.reject(err)
   }
 )
+
+// 请求工具函数
+export default (url, method, submitData) => {
+  // 负责发请求
+  return instance({
+    url,
+    method,
+    [method.toLowerCase() === 'get' ? 'params' : 'data']: submitData
+  })
+}
