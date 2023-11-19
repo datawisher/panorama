@@ -6,15 +6,15 @@
     <!--    二级路由-->
     <RouterView />
   </div>
-  <!--  底部组件-->
-  <footer>底部组件</footer>
+  <AppFooter />
 </template>
 <script>
 import AppTopnav from '@/components/app-topnav.vue'
 import AppHeader from '@/components/app-header.vue'
+import AppFooter from '@/components/app-footer.vue'
 
 export default {
   name: 'Layout',
-  components: { AppTopnav, AppHeader }
+  components: { AppTopnav, AppHeader, AppFooter }
 }
 </script>
