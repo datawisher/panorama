@@ -1,7 +1,6 @@
 <template>
   <AppTopnav />
-  <!--  顶部组件-->
-  <header>顶部组件</header>
+  <AppHeader />
   <!--  内容容器-->
   <div class="main">
     <!--    二级路由-->
@@ -12,9 +11,10 @@
 </template>
 <script>
 import AppTopnav from '@/components/app-topnav.vue'
+import AppHeader from '@/components/app-header.vue'
 
 export default {
   name: 'Layout',
-  components: { AppTopnav }
+  components: { AppTopnav, AppHeader }
 }
 </script>
