@@ -32,6 +32,7 @@
 <script>
 import { computed, reactive, ref } from 'vue'
 import { useStore } from 'vuex'
+import { findBrand } from '@/api/home'
 
 export default {
   name: 'HomeCategory',
@@ -45,7 +46,9 @@ export default {
           id: 'brand-children',
           name: '品牌推荐'
         }
-      ]
+      ],
+      // 品牌列表
+      brands: []
     })
     const menuList = computed(() => {
       // 得到9个分类及其下的2个子分类
@@ -65,6 +68,8 @@ export default {
     const currCategory = computed(() => {
       return menuList.value.find((item) => item.id === categoryId.value)
     })
+    // 获取品牌数据
+    findBrand().then(data=>)
     return { menuList, categoryId, currCategory }
   }
 }
