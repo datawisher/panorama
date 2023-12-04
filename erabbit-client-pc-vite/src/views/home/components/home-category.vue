@@ -1,5 +1,5 @@
 <template>
-  <div class="home-category" @mouseleave="categoryId=null">
+  <div class="home-category" @mouseleave="categoryId = null">
     <ul class="menu">
       <li
         :class="{ active: categoryId === item.id }"
@@ -12,6 +12,16 @@
           <RouterLink v-for="sub in item.children" :key="sub.id" :to="`/category/sub/${sub.id}`"
             >{{ sub.name }}
           </RouterLink>
+        </template>
+        <!--        骨架-->
+        <template v-else>
+          <XtxSkeleton
+            height="18px"
+            width="60px"
+            bg="rgba(255,255,255,0.2)"
+            style="margin-right: 5px"
+          />
+          <XtxSkeleton height="18px" width="50px" bg="rgba(255,255,255,0.2)" />
         </template>
       </li>
     </ul>
@@ -55,9 +65,11 @@
 import { computed, reactive, ref } from 'vue'
 import { useStore } from 'vuex'
 import { findBrand } from '@/api/home'
+import XtxSkeleton from '@/components/library/xtx-skeleton.vue'
 
 export default {
   name: 'HomeCategory',
+  components: { XtxSkeleton },
   setup() {
     const store = useStore()
     const brand = reactive({
@@ -238,6 +250,18 @@ export default {
   &:hover {
     .layer {
       display: block;
+    }
+  }
+
+  .xtx-skeleton {
+    animation: fade 1s linear infinite alternate;
+  }
+  @keyframes fade {
+    from {
+      opacity: 0.2;
+    }
+    to {
+      opacity: 1;
     }
   }
 }
