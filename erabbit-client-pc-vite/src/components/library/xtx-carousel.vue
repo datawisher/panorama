@@ -1,10 +1,10 @@
 <template>
-  <div class="xtx-carousel">
+  <div class="xtx-carousel" @mouseenter="stop" @mouseleave="start">
     <!--    图片容器-->
     <ul class="carousel-body">
       <!--      显示的图片加上 fade-->
       <li
-        class="carousel-item fade"
+        class="carousel-item"
         v-for="(item, i) in sliders"
         :key="i"
         :class="{ fade: index === i }"
@@ -15,32 +15,106 @@
       </li>
     </ul>
     <!--    上一张-->
-    <a href="javascript:" class="carousel-btn prev"><i class="iconfont icon-angle-left"></i></a>
+    <a @click="toggle(-1)" href="javascript:" class="carousel-btn prev"
+      ><i class="iconfont icon-angle-left"></i
+    ></a>
     <!--    下一张-->
-    <a href="javascript:" class="carousel-btn next"><i class="iconfont icon-angle-right"></i></a>
+    <a @click="toggle(1)" href="javascript:" class="carousel-btn next"
+      ><i class="iconfont icon-angle-right"></i
+    ></a>
     <!--    指示器-->
     <div class="carousel-indicator">
       <!--      active 激活点-->
-      <span v-for="(item, i) in sliders" :key="i" :class="{ active: index === i }"></span>
+      <span
+        @click="index = i"
+        v-for="(item, i) in sliders"
+        :key="i"
+        :class="{ active: index === i }"
+      ></span>
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { onUnmounted, ref, watch } from 'vue'
 
 export default {
   name: 'XtxCarousel',
   props: {
+    // 轮播图数据
     sliders: {
       type: Array,
       default: () => []
+    },
+    // 是否自动轮播
+    autoPlay: {
+      type: Boolean,
+      default: false
+    },
+    // 间隔时长
+    duration: {
+      type: Number,
+      default: 3000
     }
   },
-  setup() {
+  setup(props) {
     // 控制显示图片的索引
     const index = ref(0)
-    return { index }
+
+    // 自动轮播图的逻辑
+    let timer = null
+    const autoPlayFn = () => {
+      // 防止定时器重复添加
+      clearInterval(timer)
+      // 自动播放，每隔多久切换索引
+      timer = setInterval(() => {
+        index.value++
+        if (index.value >= props.sliders.length) {
+          index.value = 0
+        }
+      }, props.duration)
+    }
+    // 需要监听sliders数据变化，判断如果有数据且autoplay是true
+    watch(
+      () => props.sliders,
+      (newVal) => {
+        if (newVal.length && props.autoPlay) {
+          autoPlayFn()
+        }
+      },
+      { immediate: true }
+    )
+
+    // 鼠标进入暂停，离开开启自动播放（有开启条件）
+    const stop = () => {
+      if (timer) clearInterval(timer)
+    }
+    const start = () => {
+      if (props.sliders.length && props.autoPlay) {
+        autoPlayFn()
+      }
+    }
+
+    // 点击指示器点可以切换上一张和下一张
+    const toggle = (step) => {
+      const newIndex = index.value + step
+      if (newIndex > props.sliders.length - 1) {
+        index.value = 0
+        return
+      }
+      if (newIndex < 0) {
+        index.value = props.sliders.length - 1
+        return
+      }
+      index.value = newIndex
+    }
+
+    // 组件卸载，清除定时器
+    onUnmounted(() => {
+      clearInterval(timer)
+    })
+
+    return { index, stop, start, toggle }
   }
 }
 </script>
