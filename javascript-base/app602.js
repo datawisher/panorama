@@ -51,18 +51,18 @@ obj.f() // 2
  * 避免多层 this
  */
 var o = {
-    f1: function() {
-      console.log(this);
-      var that = this;
-      var f2 = function() {
-        console.log(that);
-      }();
+    f1: function () {
+        console.log(this);
+        var that = this;
+        var f2 = function () {
+            console.log(that);
+        }();
     }
-  }
-  
-  o.f1()
-  // Object
-  // Object
+}
+
+o.f1()
+// Object
+// Object
 
 
 /**
@@ -79,7 +79,7 @@ var o = {
     }
 }
 
-o.f() 
+o.f()
 // hello a1 
 // hello a2
 
@@ -90,12 +90,79 @@ o.f()
  */
 var o = new Object();
 o.f = function () {
-  console.log(this === o);
+    console.log(this === o);
 }
 
-// jQuery 的写法
-$('#button').on('click', o.f);
+// jQuery 的写法, 结果是false
+// $('#button').on('click', o.f);
 
 /**
  * 绑定 this 的方法
  */
+// Function.prototype.call()
+var obj = {};
+
+var f = function () {
+    return this;
+};
+
+f() === global // true
+f.call(obj) === obj // true
+//call方法可以改变this的指向
+//call方法的参数，应该是一个对象。如果参数为空、null和undefined，则默认传入全局对象。
+
+var f = function () {
+    return this;
+};
+
+f.call(5) // [Number: 5]
+
+//call方法还可以接受多个参数。func.call(thisValue, arg1, arg2, ...)
+function add(a, b) {
+    return a + b;
+}
+
+add.call(this, 1, 2) // 3
+
+
+var obj = {};
+obj.hasOwnProperty('toString') // false
+// 覆盖掉继承的 hasOwnProperty 方法
+obj.hasOwnProperty = function () {
+    return true;
+};
+obj.hasOwnProperty('toString') // true
+
+Object.prototype.hasOwnProperty.call(obj, 'toString') // false
+
+
+// Function.prototype.apply()
+// 与call()的区别是，它接收一个数组作为函数执行时的参数。func.apply(thisValue, [arg1, arg2, ...])
+function f(x, y) {
+    console.log(x + y);
+}
+
+f.call(null, 1, 1) // 2
+f.apply(null, [1, 1]) // 2
+
+// 对象转数组。被处理的对象必须有length属性
+Array.prototype.slice.apply({0: 1, length: 1}) // [1]
+Array.prototype.slice.apply({0: 1}) // []
+Array.prototype.slice.apply({0: 1, length: 2}) // [1, undefined]
+Array.prototype.slice.apply({length: 1}) // [undefined]
+
+
+// 之前的例子，结果是true
+var o = new Object();
+
+o.f = function () {
+  console.log(this === o);
+}
+
+var f = function (){
+  o.f.apply(o);
+  // 或者 o.f.call(o);
+};
+
+// jQuery 的写法
+// $('#button').on('click', f);
