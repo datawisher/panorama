@@ -146,23 +146,45 @@ f.call(null, 1, 1) // 2
 f.apply(null, [1, 1]) // 2
 
 // 对象转数组。被处理的对象必须有length属性
-Array.prototype.slice.apply({0: 1, length: 1}) // [1]
-Array.prototype.slice.apply({0: 1}) // []
-Array.prototype.slice.apply({0: 1, length: 2}) // [1, undefined]
-Array.prototype.slice.apply({length: 1}) // [undefined]
+Array.prototype.slice.apply({ 0: 1, length: 1 }) // [1]
+Array.prototype.slice.apply({ 0: 1 }) // []
+Array.prototype.slice.apply({ 0: 1, length: 2 }) // [1, undefined]
+Array.prototype.slice.apply({ length: 1 }) // [undefined]
 
 
 // 之前的例子，结果是true
 var o = new Object();
 
 o.f = function () {
-  console.log(this === o);
+    console.log(this === o);
 }
 
-var f = function (){
-  o.f.apply(o);
-  // 或者 o.f.call(o);
+var f = function () {
+    o.f.apply(o);
+    // 或者 o.f.call(o);
 };
 
 // jQuery 的写法
 // $('#button').on('click', f);
+
+// 5.3 Function.prototype.bind()
+var d = new Date()
+d.getTime() // 1704118791125
+
+// var print = d.getTime
+// print()
+
+var print = d.getTime.bind(d)
+print() // 1704118791125
+
+var counter = {
+    count: 0,
+    inc: function () {
+        this.count++;
+    }
+};
+
+var func = counter.inc.bind(counter);
+func();
+counter.count // 1
+
