@@ -188,3 +188,49 @@ var func = counter.inc.bind(counter);
 func();
 counter.count // 1
 
+
+// this 绑定到其它对象
+var counter = {
+    count: 0,
+    inc: function () {
+        this.count++;
+    }
+};
+
+var obj = {
+    count: 100
+};
+var func = counter.inc.bind(obj);
+func();
+obj.count // 101
+
+
+// bind()还可以接受更多的参数，将这些参数绑定原函数的参数
+var add = function (x, y) {
+    return x * this.m + y * this.n;
+}
+
+var obj = {
+    m: 2,
+    n: 2
+};
+
+var newAdd = add.bind(obj, 5);
+newAdd(5) // 20
+
+
+// 如果bind()方法的第一个参数是null或undefined，等于将this绑定到全局对象，函数运行时this指向顶层对象（浏览器为window）
+function add(x, y) {
+    return x + y;
+}
+
+var plus5 = add.bind(null, 5);
+plus5(10) // 15
+
+
+// 利用call()方法，可以改写一些 JavaScript 原生方法的使用形式，以数组的slice()方法为例。
+[1, 2, 3].slice(0, 1) // [1]
+// 等同于
+Array.prototype.slice.call([1, 2, 3], 0, 1) // [1]
+var slice = Function.prototype.call.bind(Array.prototype.slice);
+slice([1, 2, 3], 0, 1) // [1]
