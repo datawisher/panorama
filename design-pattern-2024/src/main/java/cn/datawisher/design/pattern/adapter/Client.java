@@ -1,35 +1,34 @@
 package cn.datawisher.design.pattern.adapter;
 
-class Client {
-    public static void main(String args[]) {
-        ScoreOperation operation = new OperationAdapter(); //针对抽象目标接口编程
-        int scores[] = {84, 76, 50, 69, 90, 91, 88, 96}; //定义成绩数组
-        int result[];
-        int score;
+import cn.datawisher.design.pattern.adapter.adapters.SquarePegAdapter;
+import cn.datawisher.design.pattern.adapter.round.RoundHole;
+import cn.datawisher.design.pattern.adapter.round.RoundPeg;
+import cn.datawisher.design.pattern.adapter.square.SquarePeg;
 
-        System.out.println("成绩排序结果：");
-        result = operation.sort(scores);
-
-        //遍历输出成绩
-        for (int i : scores) {
-            System.out.print(i + ",");
-        }
-        System.out.println();
-
-        System.out.println("查找成绩90：");
-        score = operation.search(result, 90);
-        if (score != -1) {
-            System.out.println("找到成绩90。");
-        } else {
-            System.out.println("没有找到成绩90。");
+/**
+ * Somewhere in client code...
+ */
+public class Client {
+    public static void main(String[] args) {
+        // Round fits round, no surprise.
+        RoundHole hole = new RoundHole(5);
+        RoundPeg rpeg = new RoundPeg(5);
+        if (hole.fits(rpeg)) {
+            System.out.println("Round peg r5 fits round hole r5.");
         }
 
-        System.out.println("查找成绩92：");
-        score = operation.search(result, 92);
-        if (score != -1) {
-            System.out.println("找到成绩92。");
-        } else {
-            System.out.println("没有找到成绩92。");
+        SquarePeg smallSqPeg = new SquarePeg(2);
+        SquarePeg largeSqPeg = new SquarePeg(20);
+        // hole.fits(smallSqPeg); // Won't compile.
+
+        // Adapter solves the problem.
+        SquarePegAdapter smallSqPegAdapter = new SquarePegAdapter(smallSqPeg);
+        SquarePegAdapter largeSqPegAdapter = new SquarePegAdapter(largeSqPeg);
+        if (hole.fits(smallSqPegAdapter)) {
+            System.out.println("Square peg w2 fits round hole r5.");
+        }
+        if (!hole.fits(largeSqPegAdapter)) {
+            System.out.println("Square peg w20 does not fit into round hole r5.");
         }
     }
 }
