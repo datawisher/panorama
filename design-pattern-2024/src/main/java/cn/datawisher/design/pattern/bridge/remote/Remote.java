@@ -1,0 +1,13 @@
+package cn.datawisher.design.pattern.bridge.remote;
+
+public interface Remote {
+    void power();
+
+    void volumeDown();
+
+    void volumeUp();
+
+    void channelDown();
+
+    void channelUp();
+}
