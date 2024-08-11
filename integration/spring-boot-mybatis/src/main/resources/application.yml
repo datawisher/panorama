@@ -1,14 +1,16 @@
 server:
-  port: 8088
+  port: 7070
 
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.159.130:3306/honyi
+    url: jdbc:mysql://192.168.159.130:3306/hanjing
     username: jim
     password: 2\ETY}e9H.
+
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.datawisher.pojo
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.datawisher.integration.mybatis.po,com.datawisher.integration.mybatis.dto
   configuration:
+    map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
