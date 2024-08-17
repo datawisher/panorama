@@ -15,10 +15,10 @@ let name = ref('张三')
 let age = ref(18)
 let tel = '123456789'
 const changeName = () => {
-  name = '李四'
+  name.value = '李四'
 }
 const changeAge = () => {
-  age += 1
+  age.value += 1
 }
 const showTel = () => {
   alert(tel)
