@@ -13,6 +13,5 @@ public class CarDTO {
     private Double guidePrice;
     private LocalDateTime produceTime;
     private Integer carType;
-    private String carTypeName;
-
+    private CarTypeDTO carTypeDTO;
 }

@@ -4,14 +4,14 @@
 
 <mapper namespace="com.datawisher.integration.mybatis.mapper.CarMapper">
 
-    <resultMap id="carDTOMap" type="CarDTO">
+    <resultMap id="carResultMap" type="CarDTO">
         <id property="id" column="id"/>
         <result property="carNum" column="car_num"/>
         <result property="brand" column="brand"/>
         <result property="guidePrice" column="guide_price"/>
         <result property="produceTime" column="produce_time"/>
         <result property="carType" column="car_type"/>
-        <result property="carTypeName" column="name"/>
+        <result property="carTypeDTO.carTypeName" column="name"/>
     </resultMap>
 
     <select id="getAll" resultType="Car">
@@ -22,7 +22,7 @@
         select * from t_car t1 left join t_car_type t2 on t1.car_type = t2.id
     </select>
 
-    <select id="getAll4" resultMap="carDTOMap">
+    <select id="getAll4" resultMap="carResultMap">
         select * from t_car t1 left join t_car_type t2 on t1.car_type = t2.id
     </select>
 </mapper>
