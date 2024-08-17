@@ -2,18 +2,20 @@
   <!--  <Person/>-->
   <!--  <Car/>-->
   <!-- <Car2/> -->
-  <Person2 />
+  <!-- <Person2 /> -->
+  <Person3 />
 </template>
 
 <script>
 import Person from "@/components/Person.vue";
 import Person2 from "@/components/Person2.vue";
+import Person3 from "@/components/Person3.vue";
 import Car from "@/components/Car.vue";
 import Car2 from "@/components/Car2.vue";
 
 export default {
   name: "App",
-  components: { Car2, Car, Person, Person2 }
+  components: { Car2, Car, Person, Person2, Person3 }
 }
 </script>
 
