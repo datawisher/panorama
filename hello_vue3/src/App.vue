@@ -1,13 +1,13 @@
 <template>
-  <Person7 />
+  <Person8 />
 </template>
 
 <script>
-  import Person7 from "@/components/Person7.vue";
+  import Person8 from "@/components/Person8.vue";
 
   export default {
     name: "App",
-    components: { Person7 }
+    components: { Person8 }
   }
 </script>
 
