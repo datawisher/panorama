@@ -1,14 +1,9 @@
 <template>
-  <Person8 />
+  <Father />
 </template>
 
-<script>
-  import Person8 from "@/components/Person8.vue";
-
-  export default {
-    name: "App",
-    components: { Person8 }
-  }
+<script setup lang="ts" name="App">
+  import Father from '@/pages/01_props/Father.vue'
 </script>
 
 <style>
