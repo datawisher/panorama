@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="Child">
+<script setup lang="ts" name="Child1">
 import {ref} from "vue";
 import emitter from "@/utils/emitter";
 

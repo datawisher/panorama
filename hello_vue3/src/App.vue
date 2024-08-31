@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts" name="App">
-  import Father from "@/pages/03_mitt/Father.vue"
+  import Father from "@/pages/01_props/Father.vue"
 </script>
 
 <style>
