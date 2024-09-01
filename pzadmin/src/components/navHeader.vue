@@ -1,7 +1,7 @@
 <template>
   <div class="header-container">
     <div class="header-left flex-box">
-      <el-icon class="icon" size="20">
+      <el-icon class="icon" size="20" @click="store.commit('collapseMenu')">
         <Fold/>
       </el-icon>
     </div>
@@ -27,6 +27,10 @@
 
 <script setup lang="ts">
 import {Fold} from "@element-plus/icons-vue";
+import {useStore} from "vuex";
+
+const store = useStore();
+
 
 </script>
 
