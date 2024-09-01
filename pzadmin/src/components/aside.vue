@@ -1,5 +1,6 @@
 <template>
   <el-menu
+      :style="{width: '230px'}"
       active-text-color="#ffd04b"
       background-color="#545c64"
       class="aside-container"

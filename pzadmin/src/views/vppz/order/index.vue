@@ -1,5 +1,5 @@
 <template>
-
+<h2>vppz/order</h2>
 </template>
 
 <script setup lang="ts">
