@@ -1,10 +1,11 @@
 <template>
   <div class="common-layout">
     <el-container>
-      <!--      <el-aside width="200px">Aside</el-aside>-->
       <Aside/>
       <el-container>
-        <el-header>Header</el-header>
+        <el-header>
+          <Header/>
+        </el-header>
         <el-main>
           <RouterView/>
         </el-main>
@@ -16,6 +17,7 @@
 <script setup lang="ts">
 
 import Aside from "../components/aside.vue";
+import Header from "../components/navHeader.vue";
 </script>
 
 <style lang="less" scoped>

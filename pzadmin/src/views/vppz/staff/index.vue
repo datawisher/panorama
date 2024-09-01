@@ -1,5 +1,5 @@
 <template>
-<h2>vppz/staff</h2>
+<div>vppz/staff</div>
 </template>
 
 <script setup lang="ts">

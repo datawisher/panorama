@@ -55,3 +55,19 @@ export default defineConfig({
 })
 ```
 
+## 页面Layout布局
+
+引入 Container 布局容器
+
+## aside组件内容
+
+通过useRouter获取数据
+使用递归组件来实现
+@element-plus/icons-vued的引入
+
+## header组件内容
+
+flex布局
+引入vuex实现组件通信
+点击按钮展开收起菜单
+tag显示和点击关闭逻辑
