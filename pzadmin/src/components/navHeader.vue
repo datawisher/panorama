@@ -17,7 +17,7 @@
           <router-link class="text flex-box" :to="{path:item.path}">
             {{ item.name }}
           </router-link>
-          <el-icon class="close" size="12">
+          <el-icon class="close" size="12" @click="closeTab(item, index)">
             <Close/>
           </el-icon>
         </li>
@@ -47,15 +47,41 @@
 import {Close, Fold} from "@element-plus/icons-vue";
 import {computed} from "vue";
 import {useStore} from "vuex";
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 
 // 创建状态管理实例
 const store = useStore();
 // 当前路由对象
 const route = useRoute();
-
+const router = useRouter();
 
 const selectMenu = computed(() => store.state.menu.selectMenu);
+
+// 点击关闭tab
+const closeTab = (item, index) => {
+  store.commit('closeMenu', item);
+  // 删除的非当前页tab
+  if (route.path !== item.path) {
+    return;
+  }
+  const selectMenuData = selectMenu.value;
+  // 删除最后一项
+  if (index === selectMenuData.length) {
+    // 如果tab只有一个
+    if (!selectMenuData.length) {
+      router.push('/');
+    } else {
+      router.push({
+        path: selectMenuData[index - 1].path
+      });
+    }
+  } else {
+    // 如果删除的是中间位置tab
+    router.push({
+      path: selectMenuData[index].path
+    });
+  }
+}
 </script>
 
 <style lang="less" scoped>
@@ -102,9 +128,11 @@ const selectMenu = computed(() => store.state.menu.selectMenu);
         a {
           color: #409eff;
         }
+
         i {
           color: #409eff;
         }
+
         background-color: #f5f5f5;
       }
     }
