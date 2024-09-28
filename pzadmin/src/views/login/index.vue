@@ -11,9 +11,12 @@
       <div class="jump-link">
         <el-link type="primary" @click="handleChange">{{ formType ? '返回登录' : '注册账号' }}</el-link>
       </div>
-      <el-form :model="loginForm"
-               style="max-width: 600px"
-               class="demo-ruleForm">
+      <el-form
+          ref="loginFormRef"
+          :model="loginForm"
+          style="max-width: 600px"
+          class="demo-ruleForm"
+          :rules="rules">
         <el-form-item prop="userName">
           <el-input v-model="loginForm.userName" placeholder="手机号" :prefix-icon="UserFilled"></el-input>
         </el-form-item>
@@ -26,6 +29,11 @@
               <span @click="countDownChange">{{ countDown.validText }}</span>
             </template>
           </el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" style="width: 100%" @click="submitForm">
+            {{ formType ? '注册' : '登录' }}
+          </el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -53,6 +61,26 @@ const formType = ref(0)
 const handleChange = () => {
   formType.value = !formType.value
 }
+
+const rules = reactive({
+  userName: [
+    {required: true, message: '请输入手机号', trigger: 'blur'},
+    {
+      pattern: /^1(3[0-9]|4[01456879]|5[0-35-9]|6[2567]|7[0-8]|8[0-9]|9[0-35-9])\d{8}$/,
+      message: '请输入正确的手机号',
+      trigger: 'blur'
+    }
+  ],
+  passWord: [
+    {required: true, message: '请输入密码', trigger: 'blur'},
+    {min: 6, message: '密码长度不能小于6位', trigger: 'blur'},
+    {
+      pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,}$/,
+      message: '密码必须包含字母和数字',
+      trigger: 'blur'
+    }
+  ]
+})
 
 // 发送短信
 const countDown = reactive({
@@ -86,6 +114,11 @@ const countDownChange = () => {
   flag = true
 }
 
+
+// 表单提交
+const submitForm = () => {
+
+}
 </script>
 
 <style lang="less" scoped>
