@@ -44,6 +44,7 @@
 import {ref, reactive} from 'vue'
 import {Lock, UserFilled} from "@element-plus/icons-vue";
 import {ElMessage} from "element-plus";
+import {getCode} from "../../api";
 
 const imgUrl = new URL('../../../public/login-head.png', import.meta.url).href
 
@@ -112,6 +113,11 @@ const countDownChange = () => {
     }
   }, 1000);
   flag = true
+  getCode({tel: loginForm.userName}).then(
+      data => {
+        console.log(data, 'data')
+      }
+  )
 }
 
 
