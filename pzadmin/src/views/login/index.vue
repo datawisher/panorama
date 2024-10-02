@@ -45,6 +45,7 @@ import {ref, reactive} from 'vue'
 import {Lock, UserFilled} from "@element-plus/icons-vue";
 import {ElMessage} from "element-plus";
 import {getCode, userAuthentication, login} from "../../api";
+import {useRouter} from "vue-router";
 
 const imgUrl = new URL('../../../public/login-head.png', import.meta.url).href
 
@@ -123,9 +124,11 @@ const countDownChange = () => {
   )
 }
 
+const router = useRouter()
 const loginFormRef = ref()
 // 表单提交
 const submitForm = async (formEl) => {
+  ElMessage.warning('正在提交')
   if (!formEl) return
   // 手动触发校验
   await formEl.validate((valid, fields) => {
@@ -133,7 +136,7 @@ const submitForm = async (formEl) => {
       console.log(loginForm, 'submit!')
       // 注册页面
       if (formType.value) {
-        userAuthentication(loginForm).then(({data})=>{
+        userAuthentication(loginForm).then(({data}) => {
           if (data.code === 10000) {
             ElMessage.success('注册成功，请登录')
             formType.value = 0
@@ -141,13 +144,14 @@ const submitForm = async (formEl) => {
         })
       } else {
         // 登录页面
-        login(loginForm).then(({data})=>{
+        login(loginForm).then(({data}) => {
           if (data.code === 10000) {
             ElMessage.success('登录成功')
             console.log(data, 'data')
             // 将token和用户信息保存到localStorage
             localStorage.setItem('pz_token', data.data.token)
             localStorage.setItem('pz_userInfo', JSON.stringify(data.data.userInfo))
+            router.push('/')
           }
         })
       }
