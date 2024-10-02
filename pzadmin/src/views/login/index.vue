@@ -31,7 +31,7 @@
           </el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" style="width: 100%" @click="submitForm">
+          <el-button type="primary" style="width: 100%" @click="submitForm(loginFormRef)">
             {{ formType ? '注册' : '登录' }}
           </el-button>
         </el-form-item>
@@ -44,7 +44,7 @@
 import {ref, reactive} from 'vue'
 import {Lock, UserFilled} from "@element-plus/icons-vue";
 import {ElMessage} from "element-plus";
-import {getCode} from "../../api";
+import {getCode, userAuthentication, login} from "../../api";
 
 const imgUrl = new URL('../../../public/login-head.png', import.meta.url).href
 
@@ -102,11 +102,12 @@ const countDownChange = () => {
     })
   }
   // 倒计时
-  setInterval(() => {
+  const time = setInterval(() => {
     if (countDown.time <= 0) {
       countDown.time = 10;
       countDown.validText = '获取验证码';
       flag = false
+      clearInterval(time);
     } else {
       countDown.time--;
       countDown.validText = countDown.time + '秒后重发';
@@ -115,15 +116,45 @@ const countDownChange = () => {
   flag = true
   getCode({tel: loginForm.userName}).then(
       data => {
-        console.log(data, 'data')
+        if (data.code === 10000) {
+          ElMessage.success('发送成功')
+        }
       }
   )
 }
 
-
+const loginFormRef = ref()
 // 表单提交
-const submitForm = () => {
-
+const submitForm = async (formEl) => {
+  if (!formEl) return
+  // 手动触发校验
+  await formEl.validate((valid, fields) => {
+    if (valid) {
+      console.log(loginForm, 'submit!')
+      // 注册页面
+      if (formType.value) {
+        userAuthentication(loginForm).then(({data})=>{
+          if (data.code === 10000) {
+            ElMessage.success('注册成功，请登录')
+            formType.value = 0
+          }
+        })
+      } else {
+        // 登录页面
+        login(loginForm).then(({data})=>{
+          if (data.code === 10000) {
+            ElMessage.success('登录成功')
+            console.log(data, 'data')
+            // 将token和用户信息保存到localStorage
+            localStorage.setItem('pz_token', data.data.token)
+            localStorage.setItem('pz_userInfo', JSON.stringify(data.data.userInfo))
+          }
+        })
+      }
+    } else {
+      console.log('error submit!', fields)
+    }
+  })
 }
 </script>
 
