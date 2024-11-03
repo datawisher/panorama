@@ -28,4 +28,15 @@ public class GuavaListTest {
         assertThat(chars, contains('J', 'o', 'h', 'n'));
     }
 
+    @Test
+    public void whenPartitionList_thenPartitioned() {
+        List<String> names = Lists.newArrayList("John", "Jane", "Adam", "Tom", "Viki", "Tyler");
+
+        List<List<String>> result = Lists.partition(names, 2);
+
+        assertEquals(3, result.size());
+        assertThat(result.get(0), contains("John", "Jane"));
+        assertThat(result.get(1), contains("Adam", "Tom"));
+        assertThat(result.get(2), contains("Viki", "Tyler"));
+    }
 }
