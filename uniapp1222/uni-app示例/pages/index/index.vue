@@ -2,7 +2,7 @@
 	<view class="content">
 		<image class="logo" src="/static/logo.png"></image>
 		<view class="text-area">
-			<text class="title">{{title}}</text>
+			<text class="title">{{ title }}</text>
 		</view>
 	</view>
 </template>
@@ -11,19 +11,19 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				title: 'Hello',
 			}
 		},
-		onLoad() {
-
-		},
-		methods: {
-
-		}
+		onLoad() {},
+		methods: {},
 	}
 </script>
 
-<style>
+<style lang="scss">
+	page {
+		background-color: $uni-bg-color;
+	}
+
 	.content {
 		display: flex;
 		flex-direction: column;
