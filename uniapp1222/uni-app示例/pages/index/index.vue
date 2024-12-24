@@ -1,5 +1,6 @@
 <template>
 	<view class="content">
+		<navigator url="/subpkg_task/detail/detail">点击这里跳转详情</navigator>
 		<image class="logo" src="/static/logo.png"></image>
 		<view class="text-area">
 			<text class="title">{{ title }}</text>
