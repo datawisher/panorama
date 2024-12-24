@@ -3,7 +3,19 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "学习 uni-app"
+			}
+		},
+		{
+			"path": "pages/my/index",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/msg/index",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		}
 	],
@@ -12,6 +24,27 @@
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"list": [{
+				"pagePath": "pages/index/index",
+				"text": "任务",
+				"iconPath": "static/tabbar/task_normal.png",
+				"selectedIconPath": "static/tabbar/task_selected.png"
+			},
+			{
+				"pagePath": "pages/msg/index",
+				"text": "消息",
+				"iconPath": "static/tabbar/message_normal.png",
+				"selectedIconPath": "static/tabbar/message_selected.png"
+			},
+			{
+				"pagePath": "pages/my/index",
+				"text": "我的",
+				"iconPath": "static/tabbar/my_normal.png",
+				"selectedIconPath": "static/tabbar/my_selected.png"
+			}
+		]
 	},
 	"uniIdRouter": {}
 }
