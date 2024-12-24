@@ -5,6 +5,19 @@
 		<view class="text-area">
 			<text class="title">{{ title }}</text>
 		</view>
+		<uni-countdown
+			:day="1"
+			:hour="1"
+			:minute="12"
+			:second="40"
+		></uni-countdown>
+		<uni-calendar
+			:insert="true"
+			:lunar="true"
+			:start-date="'2019-3-2'"
+			:end-date="'2019-5-20'"
+			@change="change"
+		/>
 	</view>
 </template>
 
