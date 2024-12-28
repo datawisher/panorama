@@ -12,6 +12,7 @@
   "author": "lotjol <botue@sina.com>",
   "license": "ISC",
   "dependencies": {
+    "pinia": "^2.3.0",
     "uni-app-fetch": "^0.0.3"
   }
 }
