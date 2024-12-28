@@ -1,0 +1,252 @@
+{
+  "condition": {
+    "current": 0,
+    "list": [{
+        "name": "任务",
+        "path": "pages/task/index",
+        "query": ""
+      },
+      {
+        "name": "登录",
+        "path": "pages/login/index"
+      },
+      {
+        "name": "我的",
+        "path": "pages/my/index"
+      },
+      {
+        "name": "消息",
+        "path": "pages/message/index"
+      },
+      {
+        "name": "车辆信息",
+        "path": "subpkg_user/truck/index"
+      },
+      {
+        "name": "任务数据",
+        "path": "subpkg_user/task/index"
+      },
+      {
+        "name": "系统设置",
+        "path": "subpkg_user/settings/index"
+      },
+      {
+        "name": "换绑手机",
+        "path": "subpkg_user/mobile/index"
+      },
+      {
+        "name": "修改密码",
+        "path": "subpkg_user/password/index"
+      },
+      {
+        "name": "消息通知设置",
+        "path": "subpkg_user/notify/index"
+      },
+      {
+        "name": "消息详情",
+        "path": "subpkg_message/content/index"
+      },
+      {
+        "name": "任务详情",
+        "path": "subpkg_task/detail/index"
+      },
+      {
+        "name": "导航",
+        "path": "subpkg_task/guide/index"
+      },
+      {
+        "name": "上报异常",
+        "path": "subpkg_task/except/index"
+      },
+      {
+        "name": "交货信息",
+        "path": "subpkg_task/delivery/index"
+      },
+      {
+        "name": "查询商品",
+        "path": "subpkg_task/orders/index"
+      },
+      {
+        "name": "延迟提货",
+        "path": "subpkg_task/delay/index"
+      },
+      {
+        "name": "提货信息",
+        "path": "subpkg_task/pickup/index"
+      },
+      {
+        "name": "回车登记",
+        "path": "subpkg_task/record/index"
+      }
+    ]
+  },
+  "pages": [
+    //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+    {
+      "path": "pages/task/index",
+      "style": {
+        "navigationBarTitleText": "",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/login/index",
+      "style": {
+        "navigationBarBackgroundColor": "#ffffff"
+      }
+    },
+    {
+      "path": "pages/my/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/message/index",
+      "style": {
+        "navigationBarTitleText": "消息"
+      }
+    },
+    {
+      "path": "pages/pinia/index",
+      "style": {
+        "navigationBarTitleText": "Pinia示例"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTitleText": "神领快递",
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#ffffff",
+    "enablePullDownRefresh": false
+  },
+  "tabBar": {
+    "borderStyle": "white",
+    "backgroundColor": "#fff",
+    "color": "#818181",
+    "selectedColor": "#EF4F3F",
+    "list": [{
+        "text": "任务",
+        "pagePath": "pages/task/index",
+        "iconPath": "static/tabbar/task_normal.png",
+        "selectedIconPath": "static/tabbar/task_selected.png"
+      },
+      {
+        "text": "消息",
+        "pagePath": "pages/message/index",
+        "iconPath": "static/tabbar/message_normal.png",
+        "selectedIconPath": "static/tabbar/message_selected.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/my/index",
+        "iconPath": "static/tabbar/my_normal.png",
+        "selectedIconPath": "static/tabbar/my_selected.png"
+      }
+    ]
+  },
+  "subPackages": [{
+      "root": "subpkg_task",
+      "pages": [{
+          "path": "detail/index",
+          "style": {
+            "navigationBarTitleText": "任务详情"
+          }
+        },
+        {
+          "path": "delay/index",
+          "style": {
+            "navigationBarTitleText": "延迟提货"
+          }
+        },
+        {
+          "path": "pickup/index",
+          "style": {
+            "navigationBarTitleText": "提货信息"
+          }
+        },
+        {
+          "path": "except/index",
+          "style": {
+            "navigationBarTitleText": "上报异常"
+          }
+        },
+        {
+          "path": "delivery/index",
+          "style": {
+            "navigationBarTitleText": "交货信息"
+          }
+        },
+        {
+          "path": "orders/index",
+          "style": {
+            "navigationBarTitleText": "查询商品"
+          }
+        },
+        {
+          "path": "guide/index",
+          "style": {
+            "navigationBarTitleText": "导航"
+          }
+        },
+        {
+          "path": "record/index",
+          "style": {
+            "navigationBarTitleText": "回车登记"
+          }
+        }
+      ]
+    },
+    {
+      "root": "subpkg_message",
+      "pages": [{
+        "path": "content/index",
+        "style": {
+          "navigationBarTitleText": "详情"
+        }
+      }]
+    },
+    {
+      "root": "subpkg_user",
+      "pages": [{
+          "path": "truck/index",
+          "style": {
+            "navigationBarTitleText": "车辆信息"
+          }
+        },
+        {
+          "path": "task/index",
+          "style": {
+            "navigationBarTitleText": "任务数据"
+          }
+        },
+        {
+          "path": "settings/index",
+          "style": {
+            "navigationBarTitleText": "系统设置"
+          }
+        },
+        {
+          "path": "mobile/index",
+          "style": {
+            "navigationBarTitleText": "换绑手机"
+          }
+        },
+        {
+          "path": "password/index",
+          "style": {
+            "navigationBarTitleText": "修改密码"
+          }
+        },
+        {
+          "path": "notify/index",
+          "style": {
+            "navigationBarTitleText": "消息通知设置"
+          }
+        }
+      ]
+    }
+  ],
+  "uniIdRouter": {}
+}

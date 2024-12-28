@@ -1,0 +1,27 @@
+.user-login {
+	padding: 66rpx;
+}
+
+.login-type {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	line-height: 1;
+	margin: 40rpx 0 80rpx;
+
+	.title {
+		font-size: 48rpx;
+		color: $uni-main-color;
+	}
+
+	.type {
+		color: $uni-primary;
+		font-size: $uni-font-size-base;
+		display: flex;
+		align-items: center;
+	}
+
+	.icon-caret {
+		font-size: 50%;
+	}
+}

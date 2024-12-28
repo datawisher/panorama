@@ -1,0 +1,21 @@
+.page-container {
+  padding: 30rpx;
+}
+
+.settings-list {
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.logout-button {
+  height: 100rpx;
+  line-height: 100rpx;
+  /* #ifdef APP */
+  padding-top: 4rpx;
+  /* #endif */
+  margin-top: 80rpx;
+  border-radius: 16rpx;
+  background-color: #fff;
+  color: $uni-main-color;
+  font-size: $uni-font-size-big;
+}

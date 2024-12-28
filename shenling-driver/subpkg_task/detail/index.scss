@@ -1,0 +1,241 @@
+.page-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-bar {
+  position: relative;
+  padding: 30rpx;
+  background-color: #fff;
+  border-bottom: 1rpx solid #eee;
+
+  .icon-scan,
+  .icon-search {
+    position: absolute;
+    top: 50%;
+    left: 40rpx;
+    padding: 20rpx;
+    font-weight: 600;
+    transform: translateY(-50%);
+    color: $uni-secondary-color;
+    font-size: $uni-font-size-base;
+  }
+
+  .input {
+    height: 64rpx;
+    background-color: #f4f4f4;
+    border-radius: 64rpx;
+    padding-left: 80rpx;
+    font-size: $uni-font-size-small;
+  }
+}
+
+.task-detail {
+  flex: 1;
+  overflow: hidden;
+
+  .panel {
+    padding: 30rpx 30rpx 20rpx;
+    margin: 30rpx;
+    border-radius: 16rpx;
+    background-color: #fff;
+  }
+
+  .panel-title {
+    padding-bottom: 10rpx;
+    margin-bottom: 30rpx;
+    font-size: $uni-font-size-base;
+    color: $uni-main-color;
+  }
+
+  .info-list {
+    padding: 20rpx 10rpx 0;
+    margin-top: 40rpx;
+    border-top: 2rpx solid #f4f4f4;
+  }
+
+  .info-list-item {
+    display: flex;
+    justify-content: space-between;
+    line-height: 1;
+    padding: 20rpx 0;
+    font-size: $uni-font-size-small;
+
+    .label {
+      color: $uni-secondary-color;
+    }
+
+    .value {
+      color: $uni-main-color;
+    }
+  }
+}
+
+.basic-info {
+  .hr {
+    margin: 20rpx 0;
+    border-bottom: 1rpx solid #f4f4f4;
+  }
+
+  .timeline {
+    min-height: 110rpx;
+    position: relative;
+    padding: 0 140rpx 0 30rpx;
+    margin-left: 30rpx;
+    border-left: 2rpx dashed #f4f4f4;
+
+    &::before,
+    &::after {
+      position: absolute;
+      left: -24rpx;
+      width: 44rpx;
+      height: 44rpx;
+      text-align: center;
+      line-height: 44rpx;
+      font-size: 24rpx;
+      color: #fff;
+      border-radius: 50%;
+      background-color: pink;
+    }
+
+    &::before {
+      content: '起';
+      top: -1rpx;
+      background-color: $uni-main-color;
+    }
+
+    &::after {
+      content: '止';
+      bottom: -1rpx;
+      background-color: $uni-primary;
+    }
+
+    .line {
+      font-size: $uni-font-size-small;
+      color: $uni-secondary-color;
+      margin-top: 30rpx;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    .guide {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      font-size: 24rpx;
+      transform: translateY(-50%);
+
+      .iconfont {
+        margin-bottom: 10rpx;
+        font-size: 40rpx;
+      }
+    }
+  }
+}
+
+.except-info {
+  .panel-title {
+    margin-bottom: 10rpx;
+  }
+
+  .info-list {
+    border-top: none;
+    padding: 0 10rpx 10rpx;
+    margin-top: 0;
+
+    &:last-child {
+      border-top: 2rpx solid #f4f4f4;
+      padding-top: 10rpx;
+      padding-bottom: 0;
+    }
+  }
+}
+
+.pickup-info,
+.delivery-info {
+  .panel-title {
+    margin-bottom: 20rpx;
+  }
+
+  .label {
+    font-size: $uni-font-size-small;
+    color: $uni-secondary-color;
+  }
+
+  .pictures {
+    min-height: 190rpx;
+    position: relative;
+  }
+
+  .picture {
+    width: 190rpx;
+    height: 190rpx;
+    margin: 20rpx 30rpx 20rpx 0;
+    border-radius: 8rpx;
+    background-color: #f4f4f4;
+
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+  }
+}
+
+.picture-blank {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 201rpx;
+  text-align: center;
+  padding-top: 130rpx;
+  background-image: url(https://sl-driver.oss-cn-hangzhou.aliyuncs.com/images/blank%402x.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  font-size: 24rpx;
+  color: $uni-secondary-color;
+  transform: translate(-50%, -50%) scale(0.7);
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 30rpx 30rpx calc(env(safe-area-inset-bottom) + 30rpx);
+  font-size: $uni-font-size-base;
+  background-color: #fff;
+
+  .button {
+    height: 100rpx;
+    text-align: center;
+    line-height: 100rpx;
+    /* #ifdef APP */
+    padding-top: 4rpx;
+    /* #endif */
+    border-radius: 100rpx;
+    font-size: $uni-font-size-big;
+  }
+
+  .secondary {
+    width: 250rpx;
+    color: $uni-main-color;
+    background-color: #e6e6e6;
+  }
+
+  .primary {
+    width: 400rpx;
+    color: #fff;
+    background-color: $uni-primary;
+
+    &.block {
+      width: 690rpx;
+    }
+
+    &[disabled] {
+      background-color: #fadcd9;
+    }
+  }
+}

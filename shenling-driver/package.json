@@ -1,0 +1,17 @@
+{
+  "name": "shenling-driver",
+  "version": "0.0.1",
+  "description": "A project developed with uni-app.",
+  "main": "main.js",
+  "keywords": [
+    "uni-app",
+    "android",
+    "ios",
+    "miniprogram"
+  ],
+  "author": "lotjol <botue@sina.com>",
+  "license": "ISC",
+  "dependencies": {
+    "uni-app-fetch": "^0.0.3"
+  }
+}

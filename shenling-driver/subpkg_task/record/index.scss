@@ -1,0 +1,60 @@
+.page-container {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.scroll-view {
+  flex: 1;
+  overflow: hidden;
+}
+
+.scroll-view-wrapper {
+  padding: 30rpx 30rpx 0;
+}
+
+.base-info {
+  margin-bottom: 30rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+
+  ::v-deep .uni-icon-wrapper {
+    padding-left: 0;
+  }
+
+  .picker-value {
+    width: 400rpx;
+    color: $uni-secondary-color;
+    font-size: $uni-font-size-base;
+    text-align: right;
+  }
+}
+
+.uni-textarea-placeholder {
+  font-size: $uni-font-size-small;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 30rpx 30rpx calc(env(safe-area-inset-bottom) + 30rpx);
+  font-size: $uni-font-size-base;
+  background-color: #fff;
+
+  .button {
+    width: 100%;
+    height: 100rpx;
+    text-align: center;
+    line-height: 100rpx;
+    /* #ifdef APP */
+    padding-top: 4rpx;
+    /* #endif */
+    border-radius: 100rpx;
+    font-size: $uni-font-size-big;
+    color: #fff;
+    background-color: $uni-primary;
+    &[disabled] {
+      background-color: #fadcd9;
+    }
+  }
+}

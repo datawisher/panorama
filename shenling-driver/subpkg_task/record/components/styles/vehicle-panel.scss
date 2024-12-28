@@ -1,0 +1,30 @@
+.vehicle-panel {
+  margin-bottom: 30rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+
+  .vehicle-panel-header {
+    display: flex;
+    justify-content: space-between;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 15px;
+    font-size: $uni-font-size-base;
+    color: $uni-main-color;
+    background-color: #fff;
+  }
+
+  .label {
+    color: $uni-main-color;
+  }
+
+  .radio {
+    transform: scale(0.7) translateY(-2rpx);
+  }
+}
+
+::v-deep .uni-list-item__content-title {
+  color: $uni-secondary-color !important;
+  font-size: $uni-font-size-small !important;
+  margin-left: 4rpx;
+}
