@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Landmarks Detection</title>
+    <!-- Include TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <!-- Include MediaPipe Face Mesh -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh"></script>
+    <!-- Include TensorFlow.js Face Landmarks Detection -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection"></script>
+
+</head>
+<body>
+    <video id="webcam" autoplay></video>
+    <canvas id="overlay"></canvas>
+    <button id="loginButton">Login</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const video = document.getElementById('webcam');
+            const canvas = document.getElementById('overlay');
+            const context = canvas.getContext('2d');
+
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+            } catch (err) {
+                console.error('Error accessing webcam: ', err);
+                alert('Could not access webcam. Please check permissions.');
+            }
+
+            // Load the MediaPipe FaceMesh model using TensorFlow.js
+            const model = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
+
+            const detectorConfig = {
+                runtime: 'mediapipe', // or 'tfjs'
+                solutionPath: 'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh',
+            };
+            const detector = await faceLandmarksDetection.createDetector(model, detectorConfig);
+            console.log("FaceMesh model loaded.");
+
+            document.getElementById('loginButton').addEventListener('click', async () => {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                const faces = await detector.estimateFaces(video);
+                if (faces.length > 0) {
+                    const faceData = faces[0].keypoints.map(p => ({ x: p.x, y: p.y }));
+                    const imageBase64 = await generateFaceImage(faceData);
+                    sendFaceDataToServer(imageBase64);
+                } else {
+                    alert('No face detected!');
+                }
+            });
+        });
+
+        // 将关键点数据生成图像
+        async function generateFaceImage(faceData) {
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+
+            // 设置画布为200x200
+            const size = 200;
+            canvas.width = size;
+            canvas.height = size;
+
+            // 填充背景为黑色（黑色背景代表像素值为0）
+            context.fillStyle = 'black';
+            context.fillRect(0, 0, size, size);
+
+            // 将关键点映射到画布中，假设关键点已经归一化为0-1之间
+            faceData.forEach(point => {
+                const x = point.x * size;
+                const y = point.y * size;
+                context.fillStyle = 'white';
+                context.fillRect(x, y, 1, 1); // 用白色填充对应的关键点
+            });
+
+            // 转换为 base64 格式的图像
+            return canvas.toDataURL('image/png');
+        }
+
+        // 将生成的图像数据发送到后端
+        async function sendFaceDataToServer(imageBase64) {
+            const response = await fetch('http://localhost:8080/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ faceImage: imageBase64 })
+            });
+            const result = await response.json();
+            alert(result.message);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Landmarks Detection</title>
+    <!-- Include TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+	 <!-- Include MediaPipe Face Mesh -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh"></script>
+    <!-- Include TensorFlow.js Face Landmarks Detection -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection"></script>
+
+</head>
+<body>
+    <video id="webcam" autoplay></video>
+    <canvas id="overlay"></canvas>
+    <button id="loginButton">Login</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const video = document.getElementById('webcam');
+            const canvas = document.getElementById('overlay');
+            const context = canvas.getContext('2d');
+
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+            } catch (err) {
+                console.error('Error accessing webcam: ', err);
+                alert('Could not access webcam. Please check permissions.');
+            }
+
+            // Load the MediaPipe FaceMesh model using TensorFlow.js
+            const model = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
+
+            const detectorConfig = {
+                runtime: 'mediapipe', // or 'tfjs'
+                solutionPath: 'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh',
+            };
+            const detector = await faceLandmarksDetection.createDetector(model, detectorConfig);
+            console.log("FaceMesh model loaded.");
+
+            document.getElementById('loginButton').addEventListener('click', async () => {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                const faces = await detector.estimateFaces(video);
+                if (faces.length > 0) {
+                    const faceData = faces[0].keypoints.map(p => ({ x: p.x, y: p.y }));
+                    sendFaceDataToServer(faceData);
+                } else {
+                    alert('No face detected!');
+                }
+            });
+        });
+
+        async function sendFaceDataToServer(faceData) {
+            const response = await fetch('http://localhost:8080/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ faceData })
+            });
+            const result = await response.json();
+            alert(result.message);
+        }
+    </script>
+</body>
+</html>
